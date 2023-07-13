@@ -7,15 +7,12 @@ import WelcomePage from './components/landing/WelcomePage';
 import Main from './components/main/Main';
 import React from 'react';
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
-import axios from 'axios';
 import Note from './components/main/Note';
 import Task from './components/main/Task';
 import {LocalizationProvider} from '@mui/x-date-pickers';
 import {AdapterDayjs} from '@mui/x-date-pickers/AdapterDayjs'
 
-export const client = axios.create({ baseURL: 'http://127.0.0.1:8000/api/v1' });
-// export const client = axios.create({ baseURL: 'http://192.168.43.139:8000/api/v1' });
-// http://192.168.43.139:3000
+
 
 export const useClientStorage = (key, initialValue) => {
   const [value, setValue] = React.useState(

@@ -8,33 +8,33 @@ import useMediaQuery from '@mui/material/useMediaQuery';
 import Typography from '@mui/material/Typography';
 import { motion } from 'framer-motion';
 import { StickyNote2, ListAlt } from '@mui/icons-material';
-import { client } from '../../../App';
+import apiClient from '../../../apiClient';
 import Notes from '../Notes';
 import Tasks from '../Tasks';
 
 // utilities
 
 export const getAllNotesCategories = async (client, token) => {
-  client.defaults.headers.common['Authorization'] = `Token ${token}`;
-  return await client.get('/notes/all-notes-categories/');
+  apiClient.defaults.headers.common['Authorization'] = `Token ${token}`;
+  return await apiClient.get('/notes/all-notes-categories/');
 };
 
 const getAllNotes = async (client, token, category, id) => {
-  client.defaults.headers.common['Authorization'] = `Token ${token}`;
+  apiClient.defaults.headers.common['Authorization'] = `Token ${token}`;
   if (category === 'All' && id === 0) {
-    return await client.get('/notes/all/');
+    return await apiClient.get('/notes/all/');
   } else if (id === 1) {
-    return await client.get('/notes/all/quick/');
+    return await apiClient.get('/notes/all/quick/');
   } else if (category && id) {
-    return await client.get(`/notes/all/categorized/${id}/`);
+    return await apiClient.get(`/notes/all/categorized/${id}/`);
   } else {
     throw new Error('No search category provided');
   }
 };
 
 const getAllTasks = async (client, token) => {
-  client.defaults.headers.common['Authorization'] = `Token ${token}`;
-  return await client.get('/tasks/');
+  apiClient.defaults.headers.common['Authorization'] = `Token ${token}`;
+  return await apiClient.get('/tasks/');
 };
 
 const Body = ({

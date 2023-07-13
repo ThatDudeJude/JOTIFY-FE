@@ -12,15 +12,15 @@ import Box from '@mui/material/Box';
 import { useMediaQuery } from '@mui/material';
 import { motion } from 'framer-motion';
 import { useNavigate } from 'react-router-dom';
-import { client } from '../../../App';
+import apiClient from '../../../apiClient';
 import { ModalDialogStack } from '../NoteForm';
 import { Delete } from '@mui/icons-material';
 
 // Utilities
 
 const deleteNoteCategory = async (client, token, categoryId) => {
-  client.defaults.headers.common['Authorization'] = `Token ${token}`;
-  return await client.delete(`/notes/note-categories/${categoryId}/`);
+  apiClient.defaults.headers.common['Authorization'] = `Token ${token}`;
+  return await apiClient.delete(`/notes/note-categories/${categoryId}/`);
 };
 
 // Variants
@@ -70,7 +70,7 @@ export const DeleteCategory = ({
       .then(() => {
         setShowDeleteCategoryModal(false);
         setSelectedCategory(0);
-        setCurrentCategory({id: 0, name: 'All'})
+        setCurrentCategory({ id: 0, name: 'All' });
       })
       .catch((error) => {
         if (error.response) {

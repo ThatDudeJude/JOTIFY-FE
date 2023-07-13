@@ -21,7 +21,7 @@ import { styled as muistyled } from '@mui/material/styles';
 import useMediaQuery from '@mui/material/useMediaQuery';
 import { motion } from 'framer-motion';
 import dayjs from 'dayjs';
-import { client } from '../../../App';
+import apiClient from '../../../apiClient';
 import { ArrowBack } from '@mui/icons-material';
 import { JotifyTextFieldOutlinedStyling } from '../../../jotifyTheme';
 
@@ -65,15 +65,15 @@ const defaultFormTaskValues = {
 };
 
 const createTask = async (client, token, taskData) => {
-  client.defaults.headers.common['Authorization'] = `Token ${token}`;
+  apiClient.defaults.headers.common['Authorization'] = `Token ${token}`;
 
-  return await client.post(`/tasks/`, taskData);
+  return await apiClient.post(`/tasks/`, taskData);
 };
 
 const updateTask = async (client, token, taskId, taskData) => {
-  client.defaults.headers.common['Authorization'] = `Token ${token}`;
+  apiClient.defaults.headers.common['Authorization'] = `Token ${token}`;
 
-  return await client.put(`/tasks/task/${taskId}/`, taskData);
+  return await apiClient.put(`/tasks/task/${taskId}/`, taskData);
 };
 
 // Variant

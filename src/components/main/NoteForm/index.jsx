@@ -16,7 +16,7 @@ import { styled as muistyled } from '@mui/material/styles';
 import useMediaQuery from '@mui/material/useMediaQuery';
 import { motion } from 'framer-motion';
 import { ArrowBack, Delete, AddCircle } from '@mui/icons-material';
-import { client } from '../../../App';
+import apiClient from '../../../apiClient';
 import { deleteNote } from '../Note';
 
 // Styles
@@ -68,15 +68,15 @@ const defaultFormNoteValues = {
 };
 
 const createNote = async (client, token, noteData) => {
-  client.defaults.headers.common['Authorization'] = `Token ${token}`;
+  apiClient.defaults.headers.common['Authorization'] = `Token ${token}`;
 
-  return await client.post(`/notes/create/new/`, noteData);
+  return await apiClient.post(`/notes/create/new/`, noteData);
 };
 
 const updateNote = async (client, token, noteId, noteCategoryId, noteData) => {
-  client.defaults.headers.common['Authorization'] = `Token ${token}`;
+  apiClient.defaults.headers.common['Authorization'] = `Token ${token}`;
 
-  return await client.put(
+  return await apiClient.put(
     noteCategoryId === 1
       ? `/notes/quick-note/update/${noteId}/`
       : `/notes/categorized-note/update/${noteId}/`,

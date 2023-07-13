@@ -11,7 +11,7 @@ import { styled as muistyled } from '@mui/material/styles';
 import { useParams, useNavigate } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 import { getDate } from '../Notes';
-import { client } from '../../../App';
+import apiClient from '../../../apiClient';
 import useMediaQuery from '@mui/material/useMediaQuery';
 import { ArrowBack, Edit, Delete } from '@mui/icons-material';
 import { ModalDialogStack } from '../NoteForm';
@@ -49,18 +49,19 @@ const NoteActionBox = muistyled(Box)(({ theme }) => ({
 
 //  Utilities
 const getNote = async (client, token, categoryId, noteId) => {
-  client.defaults.headers.common['Authorization'] = `Token ${token}`;
+  apiClient.defaults.headers.common['Authorization'] = `Token ${token}`;
   if (Number(categoryId) === 1)
-    return await client.get(`/notes/quick-note/${noteId}`);
+    return await apiClient.get(`/notes/quick-note/${noteId}`);
   else if (categoryId > 1)
-    return await client.get(`/notes/categorized-note/${noteId}`);
+    return await apiClient.get(`/notes/categorized-note/${noteId}`);
 };
 
 export const deleteNote = async (client, token, categoryId, noteId) => {
-  client.defaults.headers.common['Authorization'] = `Token ${token}`;
+  apiClient.defaults.headers.common['Authorization'] = `Token ${token}`;
   if (Number(categoryId) === 1)
-    return await client.delete(`/notes/quick-note/delete/${noteId}/`);
-  else return await client.delete(`/notes/categorized-note/delete/${noteId}/`);
+    return await apiClient.delete(`/notes/quick-note/delete/${noteId}/`);
+  else
+    return await apiClient.delete(`/notes/categorized-note/delete/${noteId}/`);
 };
 
 // Variants

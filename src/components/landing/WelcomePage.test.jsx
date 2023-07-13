@@ -75,8 +75,8 @@ describe('Test Buttons', () => {
         <WelcomePage />
       </BrowserRouter>
     );
-    const loginButton = await screen.findByText('Register');
-    userEvent.click(loginButton);
+    const registerButton = await screen.findByText('Register');
+    userEvent.click(registerButton);
     expect(await screen.findByLabelText(/Name/)).toBeInTheDocument();
     expect(await screen.findByLabelText(/Email/)).toBeInTheDocument();
     expect(await screen.findByLabelText(/^Password/)).toBeInTheDocument();

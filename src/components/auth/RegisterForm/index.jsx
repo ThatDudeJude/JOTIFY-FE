@@ -6,7 +6,7 @@ import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
 import Link from '@mui/material/Link';
 import useMediaQuery from '@mui/material/useMediaQuery';
-import { client } from '../../../App';
+import apiClient from '../../../apiClient';
 
 const defaultFormValues = {
   value: '',
@@ -109,8 +109,8 @@ const RegisterForm = ({ setAuthForm }) => {
 
   const handleFormSubmit = (e) => {
     e.preventDefault();
-    delete client.defaults.headers.common['Authorization'];
-    client
+    delete apiClient.defaults.headers.common['Authorization'];
+    apiClient
       .post('/auth/signup/', {
         email: email.value,
         name: name.value,

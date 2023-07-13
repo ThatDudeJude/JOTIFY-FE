@@ -7,7 +7,7 @@ import Button from '@mui/material/Button';
 import Link from '@mui/material/Link';
 import useMediaQuery from '@mui/material/useMediaQuery';
 import { useParams, useNavigate } from 'react-router-dom';
-import { client } from '../../../App';
+import apiClient from '../../../apiClient';
 
 const defaultFormValues = {
   value: '',
@@ -78,8 +78,8 @@ const PasswordResetConfirm = ({ setAuthForm, setAuthModal }) => {
 
   const handleFormSubmit = (e) => {
     e.preventDefault();
-    delete client.defaults.headers.common['Authorization'];
-    client
+    delete apiClient.defaults.headers.common['Authorization'];
+    apiClient
       .post(`/auth/password-reset-confirm/${uid}/${resetToken}/`, {
         new_password: password2.value,
       })

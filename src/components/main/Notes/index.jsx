@@ -23,7 +23,7 @@ import {
 } from '@mui/icons-material';
 import useMediaQuery from '@mui/material/useMediaQuery';
 import { Link, useNavigate } from 'react-router-dom';
-import { client } from '../../../App';
+import apiClient from '../../../apiClient';
 import { DeleteCategory } from '../DeleteCategory';
 
 // NoteAdd, AddCircle, AddCircleOutlined
@@ -123,8 +123,8 @@ const getMatchingNotes = (string, notes) => {
 };
 
 export const getAllUserCategories = async (client, token) => {
-  client.defaults.headers.common['Authorization'] = `Token ${token}`;
-  return await client.get('/notes/user-note-types/');
+  apiClient.defaults.headers.common['Authorization'] = `Token ${token}`;
+  return await apiClient.get('/notes/user-note-types/');
 };
 
 // Variants

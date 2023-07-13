@@ -11,7 +11,7 @@ import { styled as muistyled } from '@mui/material/styles';
 import { useParams, useNavigate } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 import { getDate } from '../Notes';
-import { client } from '../../../App';
+import apiClient from '../../../apiClient';
 import useMediaQuery from '@mui/material/useMediaQuery';
 import { ArrowBack, Edit, Delete } from '@mui/icons-material';
 import { ModalDialogStack } from '../NoteForm';
@@ -49,13 +49,13 @@ const TaskActionBox = muistyled(Box)(({ theme }) => ({
 
 //  Utilities
 const getTask = async (client, token, taskId) => {
-  client.defaults.headers.common['Authorization'] = `Token ${token}`;
-  return await client.get(`/tasks/task/${taskId}`);
+  apiClient.defaults.headers.common['Authorization'] = `Token ${token}`;
+  return await apiClient.get(`/tasks/task/${taskId}`);
 };
 
 const deleteTask = async (client, token, taskId) => {
-  client.defaults.headers.common['Authorization'] = `Token ${token}`;
-  return await client.delete(`/tasks/task/${taskId}/`);
+  apiClient.defaults.headers.common['Authorization'] = `Token ${token}`;
+  return await apiClient.delete(`/tasks/task/${taskId}/`);
 };
 
 // Variants
@@ -280,7 +280,14 @@ const Task = ({ token, setToken }) => {
             // </TaskBoxContainer>
           )
         ) : action === 'edit' ? (
-          task.id && <TaskForm type={action} task={task} token={token} setToken={setToken} />
+          task.id && (
+            <TaskForm
+              type={action}
+              task={task}
+              token={token}
+              setToken={setToken}
+            />
+          )
         ) : (
           <TaskForm type={'new'} token={token} setToken={setToken} />
         )}

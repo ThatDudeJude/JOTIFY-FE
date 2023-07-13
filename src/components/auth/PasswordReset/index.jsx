@@ -7,7 +7,7 @@ import Button from '@mui/material/Button';
 import Link from '@mui/material/Link';
 import useMediaQuery from '@mui/material/useMediaQuery';
 import { useNavigate } from 'react-router-dom';
-import { client } from '../../../App';
+import apiClient from '../../../apiClient';
 
 // import { useClientStorage } from '../../../App';
 
@@ -55,8 +55,8 @@ const PasswordReset = () => {
 
   const handleFormSubmit = (e) => {
     e.preventDefault();
-    delete client.defaults.headers.common['Authorization'];
-    client
+    delete apiClient.defaults.headers.common['Authorization'];
+    apiClient
       .post('/auth/password-reset/', {
         email: email.value,
       })

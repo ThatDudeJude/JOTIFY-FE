@@ -104,7 +104,7 @@ const AuthModal = ({
     paddingLeft: small ? '1.5rem' : '2.5rem',
     paddingRight: small ? '1.5rem' : '2.5rem',
   };
-  console.log('current form', currentAuthForm, currentAuthForm === 'login');
+
   return (
     <ModalBox
       component={motion.div}

@@ -123,8 +123,8 @@ const getMatchingNotes = (string, notes) => {
 };
 
 export const getAllUserCategories = async (client, token) => {
-  apiClient.defaults.headers.common['Authorization'] = `Token ${token}`;
-  return await apiClient.get('/notes/user-note-types/');
+  client.defaults.headers.common['Authorization'] = `Token ${token}`;
+  return await client.get('/notes/user-note-types/');
 };
 
 // Variants
@@ -229,7 +229,7 @@ const Notes = ({
 
   React.useEffect(() => {
     if (notes.length > 1) {
-      getAllUserCategories(client, token)
+      getAllUserCategories(apiClient, token)
         .then((categoriesResponse) => {
           const userNoteTypes = categoriesResponse.data.all_user_note_types;
           setUserCategories(userNoteTypes);
@@ -327,8 +327,10 @@ const Notes = ({
                 return (
                   <NoteCard
                     key={Number(`${note.id}${note.note_category.id}`)}
-                    // variants={small ? noteCardVariantMobile : noteCardVariant}
-                    // {...(small ? { whileInView: 'view', initial: 'hidden' } : {})}
+                    variants={small ? noteCardVariantMobile : noteCardVariant}
+                    {...(small
+                      ? { whileInView: 'view', initial: 'hidden' }
+                      : {})}
                     //   whileInView={small ? 'view' : 'show'}
                     //   viewport={{ once: true }}
                     component={motion.div}

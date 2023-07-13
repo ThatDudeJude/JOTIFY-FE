@@ -2,33 +2,13 @@ import App from '../../App';
 import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import 'intersection-observer';
-//import axios from 'axios'
-import * as m from '../../App';
+import apiClient from '../../apiClient';
 
-// jest.mock('axios', () => {
-//   return {
-//     create: () => {
-//       return {
-//         post: () => Promise.resolve(),
-//         defaults: {
-//           headers: {
-//             common: {
-//               Authorization: 'token',
-//             },
-//           },
-//         },
-//       };
-//     },
-//     post: jest.fn(),
-//   };
-// });
+jest.mock('../../apiClient.js');
 
-// m.client = axios.create();
-
-const axios = jest.createMockFromModule('axios');
-m.client = axios.describe('Registration and Login', () => {
+describe('Registration and Login', () => {
   test('Register the user', async () => {
-    axios.post.mockImplementationOnce(() => Promise.resolve());
+    apiClient.post.mockImplementationOnce(() => Promise.resolve());
 
     render(<App />);
 
@@ -52,14 +32,47 @@ m.client = axios.describe('Registration and Login', () => {
     const submitButtons = await screen.findAllByRole('button', {
       name: /Register/,
     });
-    // expect(submitButtons[0].hasAttribute('disabled')).toBe(false);
+
     await userEvent.click(submitButtons[0]);
-    //console.log(submitButtons);
+
     expect(
       await screen.findByText(/^Don't have an account/)
     ).toBeInTheDocument();
   }, 15000);
+
   test('Login the user', async () => {
+    const loginResponse = {
+      status: 201,
+      data: {
+        token: 'token',
+        name: 'testuser',
+      },
+    };
+
+    const notesResponse = {
+      status: 200,
+      statusText: 'OK',
+      data: {
+        all_user_categories: [],
+        author_notes: [],
+      },
+    };
+
+    apiClient.post.mockImplementationOnce(() =>
+      Promise.resolve({
+        ...loginResponse,
+      })
+    );
+    apiClient.get.mockImplementationOnce(() =>
+      Promise.resolve({
+        ...notesResponse,
+      })
+    );
+    apiClient.get.mockImplementationOnce(() =>
+      Promise.resolve({
+        ...notesResponse,
+      })
+    );
     render(<App />);
 
     const loginButton = await screen.findByText('Login');
@@ -77,5 +90,7 @@ m.client = axios.describe('Registration and Login', () => {
       name: /Login/,
     });
     await userEvent.click(submitButtons[0]);
+
+    expect(await screen.findByText(/^No notes available./)).toBeInTheDocument();
   }, 10000);
 });

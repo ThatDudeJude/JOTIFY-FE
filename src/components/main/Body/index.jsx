@@ -15,26 +15,26 @@ import Tasks from '../Tasks';
 // utilities
 
 export const getAllNotesCategories = async (client, token) => {
-  apiClient.defaults.headers.common['Authorization'] = `Token ${token}`;
-  return await apiClient.get('/notes/all-notes-categories/');
+  client.defaults.headers.common['Authorization'] = `Token ${token}`;
+  return await client.get('/notes/all-notes-categories/');
 };
 
 const getAllNotes = async (client, token, category, id) => {
-  apiClient.defaults.headers.common['Authorization'] = `Token ${token}`;
+  client.defaults.headers.common['Authorization'] = `Token ${token}`;
   if (category === 'All' && id === 0) {
-    return await apiClient.get('/notes/all/');
+    return await client.get('/notes/all/');
   } else if (id === 1) {
-    return await apiClient.get('/notes/all/quick/');
+    return await client.get('/notes/all/quick/');
   } else if (category && id) {
-    return await apiClient.get(`/notes/all/categorized/${id}/`);
+    return await client.get(`/notes/all/categorized/${id}/`);
   } else {
     throw new Error('No search category provided');
   }
 };
 
 const getAllTasks = async (client, token) => {
-  apiClient.defaults.headers.common['Authorization'] = `Token ${token}`;
-  return await apiClient.get('/tasks/');
+  client.defaults.headers.common['Authorization'] = `Token ${token}`;
+  return await client.get('/tasks/');
 };
 
 const Body = ({
@@ -73,8 +73,8 @@ const Body = ({
   React.useEffect(() => {
     if (currentTab === 'notes') {
       Promise.all([
-        getAllNotesCategories(client, token),
-        getAllNotes(client, token, category.name, category.id),
+        getAllNotesCategories(apiClient, token),
+        getAllNotes(apiClient, token, category.name, category.id),
       ])
         .then(([categoriesResponse, notesResponse]) => {
           if (
@@ -108,7 +108,7 @@ const Body = ({
           }
         });
     } else if (currentTab === 'tasks') {
-      getAllTasks(client, token)
+      getAllTasks(apiClient, token)
         .then((tasksResponse) => {
           if (tasksResponse.status === 200 && tasksResponse.statusText === 'OK')
             setTasksTabData({

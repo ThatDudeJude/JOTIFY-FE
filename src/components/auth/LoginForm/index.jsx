@@ -17,13 +17,12 @@ const defaultFormValues = {
   message: 'Please fill out this field!',
 };
 
-const PasswordReset = () => {
+const LoginForm = ({ setAuthModal, setAuthForm, setToken, setName }) => {
   const small = useMediaQuery('(max-width: 600px)');
+  const navigate = useNavigate();
   const [email, setEmail] = React.useState(defaultFormValues);
-  const [emailAccepted, setEmailAccepted] = React.useState({
-    isConfirmed: false,
-    message: '',
-  });
+  const [password, setPassword] = React.useState(defaultFormValues);
+
   const [formError, setFormError] = React.useState({
     error: false,
     errorMessage: '',
@@ -39,10 +38,23 @@ const PasswordReset = () => {
       });
     } else if (value) {
       setEmail({ ...email, value: value, error: false, message: '' });
-      setFormError({
-        ...formError,
+    }
+  };
+
+  const passwordHandler = (value) => {
+    if (value === '') {
+      setPassword({
+        ...password,
+        value: value,
+        error: true,
+        message: 'Please enter your password.',
+      });
+    } else {
+      setPassword({
+        ...password,
+        value: value,
         error: false,
-        errorMessage: '',
+        message: '',
       });
     }
   };
@@ -50,6 +62,8 @@ const PasswordReset = () => {
   const handleFormChange = (e) => {
     if (e.target.name === 'email') {
       emailHandler(e.target.value);
+    } else if (e.target.name === 'password') {
+      passwordHandler(e.target.value);
     }
   };
 
@@ -57,33 +71,25 @@ const PasswordReset = () => {
     e.preventDefault();
     delete apiClient.defaults.headers.common['Authorization'];
     apiClient
-      .post('/auth/password-reset/', {
+      .post('/auth/login/', {
         email: email.value,
+        password: password.value,
       })
       .then((res) => {
-        if (res.status === 202) {
-          setEmailAccepted({
-            ...emailAccepted,
-            isConfirmed: true,
-            message: res.data.message,
-          });
+        if (res.status === 201) {
+          setToken(res.data.token);
+          setName(res.data.name);
+          setAuthModal(false);
+          navigate('/');
         }
       })
       .catch((error) => {
-        if (error.response) {
-          if (error.response.status === 406) {
-            setEmail({
-              ...email,
-              error: true,
-              message: error.response.data.error,
-            });
-          } else if (error.response.status === 400) {
-            setFormError({
-              ...formError,
-              error: true,
-              errorMessage: error.response.data.error,
-            });
-          }
+        if (error.response && error.response.status === 400) {
+          setEmail({
+            ...email,
+            error: true,
+            message: error.response.data.error,
+          });
         } else if (error.request) {
           setFormError({
             ...formError,
@@ -107,68 +113,98 @@ const PasswordReset = () => {
         component='h1'
         sx={{ width: '100%', textAlign: 'center', marginTop: '2rem' }}
       >
-        Password Reset
+        Login
       </Typography>
-      {emailAccepted.isConfirmed ? (
-        <Box sx={{ margin: '2rem 0rem' }}>
-          <Typography variant='h6' component='p'>
-            Request successful. {emailAccepted.message}
-          </Typography>
-        </Box>
-      ) : (
-        <form
-          action=''
-          onSubmit={(e) => handleFormSubmit(e)}
-          onChange={(e) => handleFormChange(e)}
-          style={{ marginTop: '2rem', marginBottom: '2rem' }}
-        >
-          <Stack spacing={2}>
-            <Box>
-              <Typography variant='h6' component='p'>
-                Confirm email address for password reset link:
-              </Typography>
-            </Box>
-            <Box>
-              <TextField
-                fullWidth
-                name='email'
-                label='Email'
-                required
-                type='email'
-                variant='outlined'
-                className='jotify-authtextfield'
-                value={email.value}
-                error={email.error}
-                helperText={email.error && email.message}
-              />
-            </Box>
-            <Button
-              variant='contained'
-              type='submit'
-              component='button'
-              disabled={!(email.value && !email.error)}
+      <form
+        action=''
+        onSubmit={(e) => handleFormSubmit(e)}
+        onChange={(e) => handleFormChange(e)}
+        style={{ marginTop: '2rem', marginBottom: '2rem' }}
+      >
+        <Stack spacing={3}>
+          <Box>
+            <TextField
+              fullWidth
+              name='email'
+              label='Email'
+              required
+              type='email'
+              variant='outlined'
+              className='jotify-authtextfield'
+              value={email.value}
+              error={email.error}
+              helperText={email.error && email.message}
+            />
+          </Box>
+          <Box>
+            <TextField
+              fullWidth
+              name='password'
+              label='Password'
+              required
+              type='password'
+              variant='outlined'
+              className='jotify-authtextfield'
+              value={password.value}
+              error={password.error}
+              helperText={password.error && password.message}
+            />
+          </Box>
+          <Link
+            style={{ fontSize: '0.9rem', cursor: 'pointer' }}
+            onClick={() => setAuthForm('reset email')}
+          >
+            Forgot password?
+          </Link>
+          <Button
+            variant='contained'
+            type='submit'
+            component='button'
+            disabled={
+              !(
+                email.value &&
+                !email.error &&
+                password.value &&
+                !password.error
+              )
+            }
+          >
+            Login
+          </Button>
+          {formError.error && (
+            <Typography
+              variant='p'
+              sx={{
+                color: 'red',
+                fontSize: '1rem',
+                marginTop: '1rem',
+                marginBottom: '1rem',
+                width: '100%',
+              }}
             >
-              Send Reset Request
-            </Button>
-            {formError.error && (
-              <Typography
-                variant='p'
-                sx={{
-                  color: 'red',
-                  fontSize: '1rem',
-                  marginTop: '1rem',
-                  marginBottom: '1rem',
-                  width: '100%',
-                }}
-              >
-                {formError.errorMessage}
-              </Typography>
-            )}
-          </Stack>
-        </form>
-      )}
+              {formError.errorMessage}
+            </Typography>
+          )}
+        </Stack>
+      </form>
+      <Box>
+        <Typography
+          variant='h6'
+          component='p'
+          sx={{ width: '100%', textAlign: 'center', marginBottom: '2rem' }}
+        >
+          Don't have an account? Register{' '}
+          <Link
+            variant='button'
+            component='button'
+            onClick={() => setAuthForm('register')}
+          >
+            here
+          </Link>
+        </Typography>
+      </Box>
     </Box>
   );
 };
 
-export default PasswordReset;
+export default LoginForm;

@@ -32,129 +32,129 @@ const setAuthForm = jest.fn();
 const setToken = jest.fn();
 const setName = jest.fn();
 
-// describe('Signup Authentication Form', () => {
-//   test('signup form input', async () => {
-//     render(
-//       <BrowserRouter>
-//         <AuthModal
-//           setAuthModal={setAuthModal}
-//           setAuthForm={setAuthForm}
-//           setToken={setToken}
-//           setName={setName}
-//           currentAuthForm={'register'}
-//         />
-//       </BrowserRouter>
-//     );
+describe('Signup Authentication Form', () => {
+  test('signup form input', async () => {
+    render(
+      <BrowserRouter>
+        <AuthModal
+          setAuthModal={setAuthModal}
+          setAuthForm={setAuthForm}
+          setToken={setToken}
+          setName={setName}
+          currentAuthForm={'register'}
+        />
+      </BrowserRouter>
+    );
 
-//     const nameInput = await screen.findByLabelText(/Name/);
-//     await userEvent.type(nameInput, 'TestUser');
-//     expect(await screen.findByDisplayValue('TestUser')).toBeInTheDocument();
-//     expect(nameInput.value).toBe('TestUser');
-//     const emailInput = await screen.findByLabelText(/Email/);
-//     await userEvent.type(emailInput, 'testuser@jotify.com');
-//     expect(
-//       await screen.findByDisplayValue('testuser@jotify.com')
-//     ).toBeInTheDocument();
-//     const password1Input = await screen.findByLabelText(/^Password/);
-//     await userEvent.type(password1Input, '1qW@3eR$5tY^7u');
-//     expect(password1Input.value).toBe('1qW@3eR$5tY^7u');
-//     const password2Input = await screen.findByLabelText(/^Confirm Password/);
-//     await userEvent.type(password2Input, '1qW@3eR$5tY^7u');
+    const nameInput = await screen.findByLabelText(/Name/);
+    await userEvent.type(nameInput, 'TestUser');
+    expect(await screen.findByDisplayValue('TestUser')).toBeInTheDocument();
+    expect(nameInput.value).toBe('TestUser');
+    const emailInput = await screen.findByLabelText(/Email/);
+    await userEvent.type(emailInput, 'testuser@jotify.com');
+    expect(
+      await screen.findByDisplayValue('testuser@jotify.com')
+    ).toBeInTheDocument();
+    const password1Input = await screen.findByLabelText(/^Password/);
+    await userEvent.type(password1Input, '1qW@3eR$5tY^7u');
+    expect(password1Input.value).toBe('1qW@3eR$5tY^7u');
+    const password2Input = await screen.findByLabelText(/^Confirm Password/);
+    await userEvent.type(password2Input, '1qW@3eR$5tY^7u');
 
-//     const submitButton = await screen.findByRole('button', {
-//       name: /Register/,
-//     });
-//     expect(submitButton.hasAttribute('disabled')).toBe(false);
-//     //
-//   }, 7000);
-//   test('signup form submit', async () => {
-//     const registerResponse = Promise.resolve({
-//       data: {},
-//       status: 200,
-//       statusText: 'Ok',
-//       headers: {},
-//       config: {},
-//       request: {},
-//     });
+    const submitButton = await screen.findByRole('button', {
+      name: /Register/,
+    });
+    expect(submitButton.hasAttribute('disabled')).toBe(false);
+    //
+  }, 7000);
+  test('signup form submit', async () => {
+    const registerResponse = Promise.resolve({
+      data: {},
+      status: 200,
+      statusText: 'Ok',
+      headers: {},
+      config: {},
+      request: {},
+    });
 
-//     m.default.post.mockImplementationOnce(() => registerResponse);
+    m.default.post.mockImplementationOnce(() => registerResponse);
 
-//     render(
-//       <BrowserRouter>
-//         <AuthModal
-//           setAuthModal={setAuthModal}
-//           setAuthForm={setAuthForm}
-//           setToken={setToken}
-//           setName={setName}
-//           currentAuthForm={'register'}
-//         />
-//       </BrowserRouter>
-//     );
+    render(
+      <BrowserRouter>
+        <AuthModal
+          setAuthModal={setAuthModal}
+          setAuthForm={setAuthForm}
+          setToken={setToken}
+          setName={setName}
+          currentAuthForm={'register'}
+        />
+      </BrowserRouter>
+    );
 
-//     const nameInput = await screen.findByLabelText(/Name/);
-//     await userEvent.type(nameInput, 'TestUser');
-//     const emailInput = await screen.findByLabelText(/Email/);
-//     await userEvent.type(emailInput, 'testuser@domain.com');
-//     const password1Input = await screen.findByLabelText(/^Password/);
-//     await userEvent.type(password1Input, '1qW@3eR$5tY^7u');
-//     const password2Input = await screen.findByLabelText(/Confirm Password/);
-//     await userEvent.type(password2Input, '1qW@3eR$5tY^7u');
+    const nameInput = await screen.findByLabelText(/Name/);
+    await userEvent.type(nameInput, 'TestUser');
+    const emailInput = await screen.findByLabelText(/Email/);
+    await userEvent.type(emailInput, 'testuser@domain.com');
+    const password1Input = await screen.findByLabelText(/^Password/);
+    await userEvent.type(password1Input, '1qW@3eR$5tY^7u');
+    const password2Input = await screen.findByLabelText(/Confirm Password/);
+    await userEvent.type(password2Input, '1qW@3eR$5tY^7u');
 
-//     const submitButton = await screen.findByRole('button', {
-//       name: /Register/,
-//     });
+    const submitButton = await screen.findByRole('button', {
+      name: /Register/,
+    });
 
-//     await userEvent.click(submitButton);
+    await userEvent.click(submitButton);
 
-//     expect(setAuthForm).toBeCalledTimes(1);
-//   }, 7000);
-//   test('signup form submit failure', async () => {
-//     const response = {
-//       response: {
-//         data: { error: 'Email already exists!' },
-//         status: 400,
-//         statusText: 'Ok',
-//         headers: {},
-//         config: {},
-//         request: {},
-//       },
-//     };
+    expect(setAuthForm).toBeCalledTimes(1);
+  }, 7000);
+  test('signup form submit failure', async () => {
+    const response = {
+      response: {
+        data: { error: 'Email already exists!' },
+        status: 400,
+        statusText: 'Ok',
+        headers: {},
+        config: {},
+        request: {},
+      },
+    };
 
-//     m.default.post.mockRejectedValueOnce(response);
+    m.default.post.mockRejectedValueOnce(response);
 
-//     render(
-//       <BrowserRouter>
-//         <AuthModal
-//           setAuthModal={setAuthModal}
-//           setAuthForm={setAuthForm}
-//           setToken={setToken}
-//           setName={setName}
-//           currentAuthForm={'register'}
-//         />
-//       </BrowserRouter>
-//     );
+    render(
+      <BrowserRouter>
+        <AuthModal
+          setAuthModal={setAuthModal}
+          setAuthForm={setAuthForm}
+          setToken={setToken}
+          setName={setName}
+          currentAuthForm={'register'}
+        />
+      </BrowserRouter>
+    );
 
-//     const nameInput = await screen.findByLabelText(/Name/);
-//     await userEvent.type(nameInput, 'TestUser');
-//     const emailInput = await screen.findByLabelText(/Email/);
-//     await userEvent.type(emailInput, 'testuser@domain.com');
-//     const password1Input = await screen.findByLabelText(/^Password/);
-//     await userEvent.type(password1Input, '1qW@3eR$5tY^7u');
-//     const password2Input = await screen.findByLabelText(/Confirm Password/);
-//     await userEvent.type(password2Input, '1qW@3eR$5tY^7u');
-//     const submitButton = await screen.findByRole('button', {
-//       name: /Register/,
-//     });
+    const nameInput = await screen.findByLabelText(/Name/);
+    await userEvent.type(nameInput, 'TestUser');
+    const emailInput = await screen.findByLabelText(/Email/);
+    await userEvent.type(emailInput, 'testuser@domain.com');
+    const password1Input = await screen.findByLabelText(/^Password/);
+    await userEvent.type(password1Input, '1qW@3eR$5tY^7u');
+    const password2Input = await screen.findByLabelText(/Confirm Password/);
+    await userEvent.type(password2Input, '1qW@3eR$5tY^7u');
+    const submitButton = await screen.findByRole('button', {
+      name: /Register/,
+    });
 
-//     await userEvent.click(submitButton);
+    await userEvent.click(submitButton);
 
-//     expect(setAuthForm).not.toHaveBeenCalled();
+    expect(setAuthForm).not.toHaveBeenCalled();
 
-//     expect(
-//       await screen.findByText('Email already exists!')
-//     ).toBeInTheDocument();
-//   }, 7000);
-// });
+    expect(
+      await screen.findByText('Email already exists!')
+    ).toBeInTheDocument();
+  }, 7000);
+});
 
 describe('Login Authentication Form', () => {
   test('login form input', async () => {

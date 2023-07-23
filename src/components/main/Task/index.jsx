@@ -49,13 +49,13 @@ const TaskActionBox = muistyled(Box)(({ theme }) => ({
 
 //  Utilities
 const getTask = async (client, token, taskId) => {
-  apiClient.defaults.headers.common['Authorization'] = `Token ${token}`;
-  return await apiClient.get(`/tasks/task/${taskId}`);
+  client.defaults.headers.common['Authorization'] = `Token ${token}`;
+  return await client.get(`/tasks/task/${taskId}`);
 };
 
 const deleteTask = async (client, token, taskId) => {
-  apiClient.defaults.headers.common['Authorization'] = `Token ${token}`;
-  return await apiClient.delete(`/tasks/task/${taskId}/`);
+  client.defaults.headers.common['Authorization'] = `Token ${token}`;
+  return await client.delete(`/tasks/task/${taskId}/`);
 };
 
 // Variants
@@ -113,7 +113,7 @@ const Task = ({ token, setToken }) => {
 
   React.useEffect(() => {
     if (taskId >= 1) {
-      getTask(client, token, taskId)
+      getTask(apiClient, token, taskId)
         .then((response) => {
           if (response.status === 200 && response.statusText === 'OK')
             setTask(response.data);
@@ -121,7 +121,7 @@ const Task = ({ token, setToken }) => {
         .catch((error) => {
           if (error.response) {
             if (error.response.status === 401) {
-              setToken('');
+              setToken('');              
               navigate('/');
             }
           } else if (error.request) {
@@ -136,7 +136,7 @@ const Task = ({ token, setToken }) => {
   }, [action, taskId]);
 
   const handleDeleteTask = (taskId) => {
-    deleteTask(client, token, taskId)
+    deleteTask(apiClient, token, taskId)
       .then((res) => {
         navigate('/app');
       })

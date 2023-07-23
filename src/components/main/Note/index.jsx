@@ -49,19 +49,18 @@ const NoteActionBox = muistyled(Box)(({ theme }) => ({
 
 //  Utilities
 const getNote = async (client, token, categoryId, noteId) => {
-  apiClient.defaults.headers.common['Authorization'] = `Token ${token}`;
+  client.defaults.headers.common['Authorization'] = `Token ${token}`;
   if (Number(categoryId) === 1)
-    return await apiClient.get(`/notes/quick-note/${noteId}`);
+    return await client.get(`/notes/quick-note/${noteId}`);
   else if (categoryId > 1)
-    return await apiClient.get(`/notes/categorized-note/${noteId}`);
+    return await client.get(`/notes/categorized-note/${noteId}`);
 };
 
 export const deleteNote = async (client, token, categoryId, noteId) => {
-  apiClient.defaults.headers.common['Authorization'] = `Token ${token}`;
+  client.defaults.headers.common['Authorization'] = `Token ${token}`;
   if (Number(categoryId) === 1)
-    return await apiClient.delete(`/notes/quick-note/delete/${noteId}/`);
-  else
-    return await apiClient.delete(`/notes/categorized-note/delete/${noteId}/`);
+    return await client.delete(`/notes/quick-note/delete/${noteId}/`);
+  else return await client.delete(`/notes/categorized-note/delete/${noteId}/`);
 };
 
 // Variants
@@ -117,10 +116,10 @@ const Note = ({ token, setToken }) => {
   const [openDeleteNoteModal, setOpenDeleteNoteModal] = React.useState(false);
   const mid = useMediaQuery('(max-width: 1100px)');
   const small = useMediaQuery('(max-width: 600px)');
-  console.log(categoryId);
+
   React.useEffect(() => {
     if (categoryId >= 1) {
-      getNote(client, token, categoryId, noteId)
+      getNote(apiClient, token, categoryId, noteId)
         .then((response) => {
           if (response.status === 200 && response.statusText === 'OK')
             setNote(response.data);
@@ -141,10 +140,15 @@ const Note = ({ token, setToken }) => {
         });
     }
     if (action !== 'view') {
-      getAllUserCategories(client, token)
+      getAllUserCategories(apiClient, token)
         .then((categoriesResponse) => {
-          const userNoteTypes = categoriesResponse.data.all_user_note_types;
-          setUserCategories(userNoteTypes);
+          if (
+            categoriesResponse.status === 200 &&
+            categoriesResponse.statusText === 'OK'
+          ) {
+            const userNoteTypes = categoriesResponse.data.all_user_note_types;
+            setUserCategories(userNoteTypes);
+          }
         })
         .catch((error) => {
           if (error.response) {
@@ -164,7 +168,7 @@ const Note = ({ token, setToken }) => {
   }, [action]);
 
   const handleDeleteNote = () => {
-    deleteNote(client, token, categoryId, noteId)
+    deleteNote(apiClient, token, categoryId, noteId)
       .then((res) => {
         navigate('/app');
       })

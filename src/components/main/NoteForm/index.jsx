@@ -68,15 +68,15 @@ const defaultFormNoteValues = {
 };
 
 const createNote = async (client, token, noteData) => {
-  apiClient.defaults.headers.common['Authorization'] = `Token ${token}`;
+  client.defaults.headers.common['Authorization'] = `Token ${token}`;
 
-  return await apiClient.post(`/notes/create/new/`, noteData);
+  return await client.post(`/notes/create/new/`, noteData);
 };
 
 const updateNote = async (client, token, noteId, noteCategoryId, noteData) => {
-  apiClient.defaults.headers.common['Authorization'] = `Token ${token}`;
+  client.defaults.headers.common['Authorization'] = `Token ${token}`;
 
-  return await apiClient.put(
+  return await client.put(
     noteCategoryId === 1
       ? `/notes/quick-note/update/${noteId}/`
       : `/notes/categorized-note/update/${noteId}/`,
@@ -220,7 +220,7 @@ const NoteForm = ({
         trackNote.current.currentOperation = 'new';
         const token = localStorage.getItem('token');
         await deleteNote(
-          client,
+          apiClient,
           token,
           trackNote.current.originalCategoryId,
           note.id
@@ -232,7 +232,7 @@ const NoteForm = ({
         trackNote.current.currentOperation = 'new';
         const token = localStorage.getItem('token');
         await deleteNote(
-          client,
+          apiClient,
           token,
           trackNote.current.originalCategoryId,
           note.id
@@ -240,7 +240,7 @@ const NoteForm = ({
       } else trackNote.current.currentOperation = 'edit';
     }
     if (trackNote.current.currentOperation === 'edit') {
-      updateNote(client, token, note.id, noteCategory.id, noteData)
+      updateNote(apiClient, token, note.id, noteCategory.id, noteData)
         .then((response) => {
           const note = response.data;
           navigate(`/app/note/view/${note.note_category.id}/${note.id}`);
@@ -272,7 +272,7 @@ const NoteForm = ({
           }
         });
     } else {
-      createNote(client, token, noteData)
+      createNote(apiClient, token, noteData)
         .then((response) => {
           const note = response.data;
           navigate(`/app/note/view/${note.note_category.id}/${note.id}`);
@@ -312,7 +312,6 @@ const NoteForm = ({
       new RegExp(`^${category.category}$`, 'i').test(newValue)
     );
     setNewCategory(newValue);
-    // console.log(userCategories, newValue);
     if (categoryExists) {
       setHideAddCategoryButton(true);
       setAddCategoryErrorMessage(`${newValue} already exists!`);
@@ -325,7 +324,7 @@ const NoteForm = ({
   const handleNewCategoryFormSubmit = (e) => {
     e.preventDefault();
     if (newCategory)
-      client
+      apiClient
         .post(`/notes/note-categories/`, { category: newCategory })
         .then((response) => {
           const categoryData = response.data;
@@ -458,6 +457,7 @@ const NoteForm = ({
                   {userCategories.length && (
                     <Select
                       name='note_category'
+                      data-testid='category_select'
                       value={userCategories.length && noteCategory.id}
                       onChange={(e) => handleNoteCategorySelect(e.target.value)}
                       sx={{
@@ -565,7 +565,7 @@ const NoteForm = ({
               textAlign: 'center',
             }}
           >
-            Add New Category
+            Create New Category
           </Typography>
           <form
             action=''
@@ -574,6 +574,7 @@ const NoteForm = ({
           >
             <Stack spacing={2}>
               <TextField
+                name='new_category'
                 label='Category Name'
                 className='jotifyModalInput'
                 variant='standard'
@@ -616,7 +617,7 @@ const NoteForm = ({
                   type='submit'
                   component='button'
                 >
-                  Add
+                  Create
                 </Button>
               </Box>
             </Stack>

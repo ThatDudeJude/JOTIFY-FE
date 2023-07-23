@@ -32,7 +32,7 @@ const TaskTableLarge = ({ allTasks }) => {
     ...taskTableLarge,
     width: mid ? '100%' : '75%',
   };
-  const [openRow, setOpenRow] = React.useState(-1);
+  const [openRow, setOpenRow] = React.useState(-1);  
   return (
     <>
       <TableContainer component={Paper} sx={taskTableLarge}>

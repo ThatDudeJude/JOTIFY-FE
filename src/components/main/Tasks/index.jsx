@@ -16,6 +16,7 @@ import TaskTableLarge from '../TaskTableLarge';
 import TaskTableSmall from '../TaskTableSmall';
 import { PlaylistAdd, PlaylistAddCircle } from '@mui/icons-material';
 import { Link } from 'react-router-dom';
+import { filter } from 'bluebird';
 
 // Style
 
@@ -92,7 +93,7 @@ const countTasks = (allTasks, priority) => {
           counts.overdue += 1;
           groups.overdueTasks.push(task);
         }
-      } else if (taskDue > new Date()) {
+      } else if (taskDue > new Date() && !task.task_completed) {
         counts.scheduled += 1;
         groups.scheduledTasks.push(task);
       } else {
@@ -123,7 +124,6 @@ const Tasks = ({ allTasks, taskPriorities }) => {
     let [counted, grouped] = countTasks(tasks, priority);
     setCounts({ ...counts, ...counted });
     if (toggleValue === 'scheduled') {
-      // console.log('scheduled', counted);
       setFilteredTasks(grouped.scheduledTasks);
     } else if (toggleValue === 'today') {
       setFilteredTasks(grouped.todaysTasks);

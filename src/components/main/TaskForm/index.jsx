@@ -65,15 +65,15 @@ const defaultFormTaskValues = {
 };
 
 const createTask = async (client, token, taskData) => {
-  apiClient.defaults.headers.common['Authorization'] = `Token ${token}`;
+  client.defaults.headers.common['Authorization'] = `Token ${token}`;
 
-  return await apiClient.post(`/tasks/`, taskData);
+  return await client.post(`/tasks/`, taskData);
 };
 
 const updateTask = async (client, token, taskId, taskData) => {
-  apiClient.defaults.headers.common['Authorization'] = `Token ${token}`;
+  client.defaults.headers.common['Authorization'] = `Token ${token}`;
 
-  return await apiClient.put(`/tasks/task/${taskId}/`, taskData);
+  return await client.put(`/tasks/task/${taskId}/`, taskData);
 };
 
 // Variant
@@ -162,7 +162,6 @@ const TaskForm = ({ type, task, token, setToken }) => {
   };
 
   const taskDueDateHandler = (value) => {
-    console.log('due date changed', value);
     if (value === '') {
       setTaskDueDate({
         ...taskDueDate,
@@ -197,7 +196,6 @@ const TaskForm = ({ type, task, token, setToken }) => {
         error: false,
         message: '',
       });
-      console.log('New due time', value);
     }
   };
 
@@ -240,11 +238,6 @@ const TaskForm = ({ type, task, token, setToken }) => {
   const handleTaskFormChange = (e) => {
     if (e.target.name === 'short_description') {
       shortDescriptionHandler(e.target.value);
-      // } else if (e.target.name === 'due_date') {
-      //console.log(e.target.value);
-      //taskDueDateHandler(e.target.value);
-      //} else if (e.target.name === 'due_time') {
-      //taskDueTimeHandler(e.target.value);
     } else if (e.target.name === 'is_completed') {
       taskCompletedHandler(!taskCompleted);
     } else if (e.target.name === 'priority') {
@@ -256,7 +249,6 @@ const TaskForm = ({ type, task, token, setToken }) => {
 
   const handleTaskFormSubmit = (e) => {
     e.preventDefault();
-    console.log(taskPriority);
     const taskData = {
       short_description: taskShortDescription.value,
       due_date: taskDueDate.value,
@@ -266,7 +258,7 @@ const TaskForm = ({ type, task, token, setToken }) => {
       task_description: taskDescription.value,
     };
     if (type === 'edit') {
-      updateTask(client, token, task.id, taskData)
+      updateTask(apiClient, token, task.id, taskData)
         .then((response) => {
           const task = response.data;
           navigate(`/app/task/view/${task.id}`);
@@ -298,7 +290,7 @@ const TaskForm = ({ type, task, token, setToken }) => {
           }
         });
     } else {
-      createTask(client, token, taskData)
+      createTask(apiClient, token, taskData)
         .then((response) => {
           const task = response.data;
           navigate(`/app/task/view/${task.id}`);
@@ -609,6 +601,9 @@ const TaskForm = ({ type, task, token, setToken }) => {
                             '& .MuiSvgIcon-root': { fontSize: 28 },
                             paddingTop: 0,
                             paddingBottom: 0,
+                          }}
+                          inputProps={{
+                            'data-testid': 'task-completed',
                           }}
                           checked={taskCompleted}
                           value={taskCompleted}

@@ -115,11 +115,9 @@ const Body = ({
               priorities: tasksTabData.priorities,
               tasks: tasksResponse.data,
             });
-          console.log('response', tasksResponse.data);
           setIsLoading(false);
         })
         .catch((error) => {
-          console.log('no data');
           if (error.response) {
             if (error.response.status === 401) {
               setRedirectToAuth(true);
@@ -139,7 +137,7 @@ const Body = ({
     setIsLoading(true);
     setCurrentTab(newValue);
   };
-  //   console.log(notesTabData.notes);
+
   return (
     <>
       <TabContext value={currentTab}>

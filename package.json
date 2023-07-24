@@ -66,6 +66,8 @@
     ]
   },
   "devDependencies": {
+    "@testing-library/cypress": "^9.0.0",
+    "cypress": "^12.17.2",
     "intersection-observer": "^0.12.2",
     "react-intersection-observer": "^9.4.3"
   },

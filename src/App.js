@@ -45,7 +45,7 @@ const App = () => {
                 <Route path='/app' element={<Main token={token} currentTab={currentTab}  setName={setName} setToken={setToken} setCurrentTab={setCurrentTab} 
                     redirectToAuth={redirectToAuth} setRedirectToAuth={setRedirectToAuth} authForm={authForm} setAuthForm={setAuthForm}
                 />}/> :
-                <Route path='/welcome' element={<WelcomePage setToken={setToken} setName={setName} />}/>                                      
+                <Route path='/welcome' element={<WelcomePage token={token} setToken={setToken} setName={setName} />}/>                                      
                 <Route path="/app/note/new" element={<Note token={token} setToken={setToken} />} />
                 <Route path="/app/note/:action/:category/:id" element={<Note token={token} setToken={setToken} />} />
                 <Route path='/app/task/new' element={<Task token={token} setToken={setToken} />} />

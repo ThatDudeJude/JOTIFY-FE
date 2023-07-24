@@ -74,10 +74,10 @@ const heroVariant = {
     x: 0,
     transition: {
       type: 'tween',
-      delay: 5,
-      delayChildren: 1,
+      delay: 3,
+      delayChildren: 0.5,
       when: 'beforeChildren',
-      staggerChildren: 1,
+      staggerChildren: 0.7,
     },
   },
 };

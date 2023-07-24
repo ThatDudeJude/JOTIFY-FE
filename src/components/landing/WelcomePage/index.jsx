@@ -6,7 +6,7 @@ import More from '../More';
 import Hero from '../Hero';
 import AuthModal from '../../auth/AuthModal';
 
-export default function WelcomePage({ setToken, setName }) {
+export default function WelcomePage({ token, setToken, setName }) {
   const [authModal, setAuthModal] = useState(false);
   const [authForm, setAuthForm] = useState('');
   const [detailScope, _] = useAnimate();
@@ -19,20 +19,20 @@ export default function WelcomePage({ setToken, setName }) {
   }, []);
   useEffect(() => {
     if (isInView) {
-      animateButton(buttonScope.current, { opacity: 1 }, { delay: 1.5 });
+      animateButton(buttonScope.current, { opacity: 1 }, { delay: 0.5 });
       animateAuthButton(
         authButtonScope.current,
         {
           display: 'grid',
         },
         {
-          delay: 1.5,
+          delay: 0.5,
         }
       );
       animateLearnMore(
         learnMoreScope.current,
         { display: 'block' },
-        { delayChildren: 10, delay: 4 }
+        { delayChildren: 3, delay: 0.2 }
       );
     }
   }, [isInView]);
@@ -52,6 +52,7 @@ export default function WelcomePage({ setToken, setName }) {
               currentAuthForm={authForm}
               setToken={setToken}
               setName={setName}
+              token={token}
             />
           ) : (
             ''

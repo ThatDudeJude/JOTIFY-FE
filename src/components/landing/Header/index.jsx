@@ -65,7 +65,7 @@ const Header = ({ authButtonScope, setAuthModal, setAuthForm }) => {
         type: 'tween',
         duration: 1.0,
         // ease: 'easeOut',
-        delay: 3,
+        delay: 1.5,
       },
     },
   };
@@ -85,9 +85,9 @@ const Header = ({ authButtonScope, setAuthModal, setAuthForm }) => {
         ? { type: 'tween' }
         : {
             type: 'spring',
-            duration: 1,
+            duration: 0.5,
             stiffness: 100,
-            delay: 5,
+            delay: 2.5,
           },
     },
   };

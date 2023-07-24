@@ -20,11 +20,21 @@ const MainBoxContainer = muistyled(Box)(({ theme }) => ({
 
 // utilities
 
-const Main = ({ token, setToken, setName, currentTab, setCurrentTab, redirectToAuth, setRedirectToAuth, authForm, setAuthForm }) => {
+const Main = ({
+  token,
+  setToken,
+  setName,
+  currentTab,
+  setCurrentTab,
+  redirectToAuth,
+  setRedirectToAuth,
+  authForm,
+  setAuthForm,
+}) => {
   //   const clientToken = localStorage.getItem('token');
   const smallForHeader = useMediaQuery('(max-width: 750px)');
-//   const [redirectToAuth, setRedirectToAuth] = React.useState(false);
-//   const [authForm, setAuthForm] = React.useState('token expired');
+  //   const [redirectToAuth, setRedirectToAuth] = React.useState(false);
+  //   const [authForm, setAuthForm] = React.useState('token expired');
 
   return (
     <Box sx={{ height: '100%' }}>
@@ -35,6 +45,7 @@ const Main = ({ token, setToken, setName, currentTab, setCurrentTab, redirectToA
           currentAuthForm={authForm}
           setToken={setToken}
           setName={setName}
+          token={token}
         />
       ) : (
         <>

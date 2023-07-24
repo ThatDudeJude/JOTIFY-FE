@@ -19,7 +19,7 @@ import { Delete } from '@mui/icons-material';
 // Utilities
 
 const deleteNoteCategory = async (client, token, categoryId) => {
-  apiClient.defaults.headers.common['Authorization'] = `Token ${token}`;
+  client.defaults.headers.common['Authorization'] = `Token ${token}`;
   return await apiClient.delete(`/notes/note-categories/${categoryId}/`);
 };
 
@@ -66,7 +66,7 @@ export const DeleteCategory = ({
 
   const handleDeleteCategorySelection = () => {
     const categoryId = currentNoteCategory.id;
-    deleteNoteCategory(client, token, categoryId)
+    deleteNoteCategory(apiClient, token, categoryId)
       .then(() => {
         setShowDeleteCategoryModal(false);
         setSelectedCategory(0);

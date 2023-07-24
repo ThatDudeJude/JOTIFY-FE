@@ -31,6 +31,7 @@ const setAuthModal = jest.fn();
 const setAuthForm = jest.fn();
 const setToken = jest.fn();
 const setName = jest.fn();
+const token = 'token';
 
 describe('Signup Authentication Form', () => {
   test('signup form input', async () => {
@@ -41,6 +42,7 @@ describe('Signup Authentication Form', () => {
           setAuthForm={setAuthForm}
           setToken={setToken}
           setName={setName}
+          token={token}
           currentAuthForm={'register'}
         />
       </BrowserRouter>
@@ -86,6 +88,7 @@ describe('Signup Authentication Form', () => {
           setAuthForm={setAuthForm}
           setToken={setToken}
           setName={setName}
+          token={token}
           currentAuthForm={'register'}
         />
       </BrowserRouter>
@@ -129,6 +132,7 @@ describe('Signup Authentication Form', () => {
           setAuthForm={setAuthForm}
           setToken={setToken}
           setName={setName}
+          token={token}
           currentAuthForm={'register'}
         />
       </BrowserRouter>
@@ -165,6 +169,7 @@ describe('Login Authentication Form', () => {
           setAuthForm={setAuthForm}
           setToken={setToken}
           setName={setName}
+          token={token}
           currentAuthForm={'login'}
         />
       </BrowserRouter>
@@ -204,6 +209,7 @@ describe('Login Authentication Form', () => {
           setAuthForm={setAuthForm}
           setToken={setToken}
           setName={setName}
+          token={token}
           currentAuthForm={'login'}
         />
       </BrowserRouter>
@@ -243,6 +249,7 @@ describe('Login Authentication Form', () => {
           setAuthForm={setAuthForm}
           setToken={setToken}
           setName={setName}
+          token={token}
           currentAuthForm={'login'}
         />
       </BrowserRouter>

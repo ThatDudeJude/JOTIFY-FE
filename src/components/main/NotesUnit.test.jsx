@@ -144,6 +144,10 @@ describe('Display Notes', () => {
       data: {
         all_user_note_types: [
           {
+            category: 'Quick Note',
+            id: 1,
+          },
+          {
             category: 'First Category',
             id: 2,
           },

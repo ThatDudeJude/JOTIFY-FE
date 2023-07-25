@@ -104,8 +104,7 @@ const Task = ({ token, setToken }) => {
   const params = useParams();
   const navigate = useNavigate();
   const action = params.action;
-  const taskId = params.id;
-  //const token = localStorage.getItem('token');
+  const taskId = params.id;  
   const [task, setTask] = React.useState({});
   const [openDeleteTaskModal, setOpenDeleteTaskModal] = React.useState(false);
   const mid = useMediaQuery('(max-width: 1100px)');

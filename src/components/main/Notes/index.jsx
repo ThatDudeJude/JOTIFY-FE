@@ -481,6 +481,8 @@ const Notes = ({
           setShowDeleteCategoryModal={setShowDeleteCategoryModal}
           setCurrentCategory={setCurrentCategory}
           setSelectedCategory={setSelectedCategory}
+          setToken={setToken}
+          token={token}
         />
       )}
     </>

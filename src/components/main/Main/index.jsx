@@ -31,7 +31,6 @@ const Main = ({
   authForm,
   setAuthForm,
 }) => {
-  //   const clientToken = localStorage.getItem('token');
   const smallForHeader = useMediaQuery('(max-width: 750px)');
   //   const [redirectToAuth, setRedirectToAuth] = React.useState(false);
   //   const [authForm, setAuthForm] = React.useState('token expired');

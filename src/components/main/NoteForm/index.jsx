@@ -218,7 +218,6 @@ const NoteForm = ({
     if (type === 'edit' && trackNote.current.originalCategoryId === 1) {
       if (noteCategory.id !== 1) {
         trackNote.current.currentOperation = 'new';
-        const token = localStorage.getItem('token');
         await deleteNote(
           apiClient,
           token,
@@ -230,7 +229,6 @@ const NoteForm = ({
     if (type === 'edit' && trackNote.current.originalCategoryId !== 1) {
       if (noteCategory.id === 1) {
         trackNote.current.currentOperation = 'new';
-        const token = localStorage.getItem('token');
         await deleteNote(
           apiClient,
           token,

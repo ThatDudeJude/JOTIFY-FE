@@ -47,10 +47,11 @@ export const DeleteCategory = ({
   setShowDeleteCategoryModal,
   setCurrentCategory,
   setSelectedCategory,
+  setToken,
+  token,
 }) => {
   const small = useMediaQuery('(max-width: 600px)');
   const navigate = useNavigate();
-  const token = localStorage.getItem('token');
   const [currentNoteCategory, setCurrentNoteCategory] = React.useState(
     userCategories[0]
   );
@@ -75,7 +76,7 @@ export const DeleteCategory = ({
       .catch((error) => {
         if (error.response) {
           if (error.response.status === 401) {
-            localStorage.setItem('token', '');
+            setToken('');
             navigate('/');
           }
         } else if (error.request) {

@@ -11,7 +11,7 @@ import RegisterForm from '../RegisterForm';
 import PasswordReset from '../PasswordReset';
 import PasswordResetConfirm from '../PasswordResetConfirm';
 import { Close } from '@mui/icons-material';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
 
 //  Styles
 
@@ -93,12 +93,13 @@ const AuthModal = ({
   setAuthModal,
   setAuthForm,
   setToken,
+  token,
   currentAuthForm,
   setName,
 }) => {
   const small = useMediaQuery('(max-width: 600px)');
   const navigate = useNavigate();
-  const token = localStorage.getItem('token');
+  const location = useLocation();
   modalContentStyle = {
     ...modalContentStyle,
     paddingLeft: small ? '1.5rem' : '2.5rem',
@@ -113,9 +114,9 @@ const AuthModal = ({
       initial='hidden'
       exit={{ opacity: 0 }}
       onClick={() => {
-        if (token) {
-          navigate('/app');
-        } else setAuthModal(false);
+        if (location.pathname === '/welcome') {
+          setAuthModal(false);
+        } else navigate('/app');
       }}
       key='modalbox'
     >
@@ -132,8 +133,10 @@ const AuthModal = ({
           <CloseButton variant='jotify-black'>
             <Close
               onClick={() => {
-                if (token) navigate('/welcome');
-                else setAuthModal(false);
+                if (location.pathname === '/app' && token) {
+                  navigate('/welcome');
+                }
+                setAuthModal(false);
               }}
               fontSize='medium'
             />
@@ -160,7 +163,7 @@ const AuthModal = ({
             <Close
               onClick={() => {
                 if (token) navigate('/welcome');
-                else setAuthModal(false);
+                setAuthModal(false);
               }}
               fontSize='medium'
             />
@@ -218,8 +221,8 @@ const AuthModal = ({
           <CloseButton variant='jotify-black'>
             <Close
               onClick={() => {
-                if (token) navigate('/welcome');
-                else setAuthModal(false);
+                if (location.pathname === '/app' && token) navigate('/welcome');
+                setAuthModal(false);
               }}
               fontSize='medium'
             />
@@ -240,8 +243,8 @@ const AuthModal = ({
           <CloseButton variant='jotify-black'>
             <Close
               onClick={() => {
-                if (token) navigate('/welcome');
-                else setAuthModal(false);
+                if (location.pathname === '/app' && token) navigate('/welcome');
+                setAuthModal(false);
               }}
               fontSize='medium'
             />

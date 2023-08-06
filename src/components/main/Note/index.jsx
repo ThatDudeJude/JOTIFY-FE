@@ -122,7 +122,8 @@ const Note = ({ token, setToken }) => {
       getNote(apiClient, token, categoryId, noteId)
         .then((response) => {
           if (response.status === 200 && response.statusText === 'OK')
-            setNote(response.data);
+            console.log(response.data);
+          setNote(response.data);
         })
         .catch((error) => {
           if (error.response) {

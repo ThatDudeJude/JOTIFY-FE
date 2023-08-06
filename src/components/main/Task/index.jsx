@@ -104,7 +104,7 @@ const Task = ({ token, setToken }) => {
   const params = useParams();
   const navigate = useNavigate();
   const action = params.action;
-  const taskId = params.id;  
+  const taskId = params.id;
   const [task, setTask] = React.useState({});
   const [openDeleteTaskModal, setOpenDeleteTaskModal] = React.useState(false);
   const mid = useMediaQuery('(max-width: 1100px)');
@@ -120,7 +120,7 @@ const Task = ({ token, setToken }) => {
         .catch((error) => {
           if (error.response) {
             if (error.response.status === 401) {
-              setToken('');              
+              setToken('');
               navigate('/');
             }
           } else if (error.request) {
@@ -344,7 +344,7 @@ const Task = ({ token, setToken }) => {
                   variant='warning'
                   onClick={() => handleDeleteTask(task.id)}
                 >
-                  Delete
+                  Confirm Delete
                 </Button>
               </Box>
             </Stack>

@@ -169,7 +169,7 @@ const LoginForm = ({ setAuthModal, setAuthForm, setToken, setName }) => {
               )
             }
           >
-            Login
+            Sign In
           </Button>
           {formError.error && (
             <Typography

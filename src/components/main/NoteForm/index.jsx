@@ -465,7 +465,11 @@ const NoteForm = ({
                       }}
                     >
                       {userCategories.map((category) => (
-                        <MenuItem key={category.id} value={category.id}>
+                        <MenuItem
+                          key={category.id}
+                          value={category.id}
+                          data-cyvalue={`${category.category}`}
+                        >
                           {category.category}
                         </MenuItem>
                       ))}

@@ -301,12 +301,17 @@ const Notes = ({
                 Category:
               </FormLabel>
               <Select
+                data-cy='category'
                 value={selectedCategory}
                 onChange={handleCategorySelect}
                 sx={{ fontSize: small && '1.0rem', height: '2.5rem' }}
               >
                 {allCategories.map((category) => (
-                  <MenuItem key={category.id} value={category.id}>
+                  <MenuItem
+                    key={category.id}
+                    value={category.id}
+                    data-cyvalue={`${category.category}`}
+                  >
                     {category.category}
                   </MenuItem>
                 ))}
@@ -433,6 +438,7 @@ const Notes = ({
           {hideAddNoteButton ? (
             <AddCircle
               sx={{ fontSize: '50px', color: '#ffc000', width: '50px' }}
+              data-cy='Add Note'
             />
           ) : (
             <Button
@@ -457,6 +463,7 @@ const Notes = ({
           {hideRemoveCategoryButton ? (
             <Delete
               sx={{ fontSize: '50px', color: '#ffc000', width: '50px' }}
+              data-cy='Delete Category'
             />
           ) : (
             <Button

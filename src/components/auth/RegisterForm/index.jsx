@@ -116,8 +116,8 @@ const RegisterForm = ({ setAuthForm }) => {
         name: name.value,
         password: password2.value,
       })
-      .then((res) => {
-        setAuthForm('login');
+      .then((response) => {
+        if (response.status === 201) setAuthForm('login');
       })
       .catch((error) => {
         if (error.response && error.response.status === 400) {
@@ -230,7 +230,7 @@ const RegisterForm = ({ setAuthForm }) => {
               )
             }
           >
-            Register
+            Register Account
           </Button>
           {formError.error && (
             <Typography

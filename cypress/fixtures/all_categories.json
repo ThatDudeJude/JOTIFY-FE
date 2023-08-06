@@ -1,0 +1,14 @@
+{
+  "all_user_note_types": [
+    {
+      "id": 1,
+      "category": "Quick Note"
+    }
+  ],
+  "all_user_categories": [
+    {
+      "id": 1,
+      "category": "Quick Note"
+    }
+  ]
+}

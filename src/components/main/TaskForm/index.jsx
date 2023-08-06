@@ -458,6 +458,7 @@ const TaskForm = ({ type, task, token, setToken }) => {
                         ...JotifyTextFieldOutlinedStyling,
                         svg: { color: '#ffc000' },
                       }}
+                      data-cy='Due Date'
                       className='jotify-authtextfield'
                       slotProps={{
                         textField: {
@@ -525,6 +526,7 @@ const TaskForm = ({ type, task, token, setToken }) => {
                       name='due_time'
                       format='HH:mm:ss'
                       ampm={false}
+                      data-cy='Due Time'
                       sx={{
                         ...JotifyTextFieldOutlinedStyling,
                         svg: { color: '#ffc000' },
@@ -566,9 +568,10 @@ const TaskForm = ({ type, task, token, setToken }) => {
                   </FormLabel>
 
                   <Select
-                    name='priority  '
+                    name='priority'
                     value={taskPriority.id}
                     onChange={(e) => handleTaskPrioritySelect(e.target.value)}
+                    data-cy='Task Priority'
                     sx={{
                       fontSize: small ? '1.0rem' : 'initial',
                       height: small ? '2.0rem' : 'initial',
@@ -577,7 +580,11 @@ const TaskForm = ({ type, task, token, setToken }) => {
                     }}
                   >
                     {taskPriorities.map((priority) => (
-                      <MenuItem key={priority.id} value={priority.id}>
+                      <MenuItem
+                        key={priority.id}
+                        value={priority.id}
+                        data-cyvalue={`${priority.name}`}
+                      >
                         {priority.name}
                       </MenuItem>
                     ))}
@@ -607,6 +614,7 @@ const TaskForm = ({ type, task, token, setToken }) => {
                           }}
                           checked={taskCompleted}
                           value={taskCompleted}
+                          data-cy='Task Completed'
                         />
                       }
                       slotProps={{

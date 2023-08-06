@@ -1,0 +1,7 @@
+{
+    "data": {
+        "error": "Email already exists!"  
+    },
+    "status": 400,
+    "statusText": "Bad Request"        
+}

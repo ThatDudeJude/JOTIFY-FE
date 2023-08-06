@@ -134,8 +134,9 @@ export const DeleteCategory = ({
               <Button
                 variant='warning'
                 onClick={() => handleDeleteCategorySelection()}
+                data-cy='Delete Category Confirm'
               >
-                Delete
+                Confirm Delete
               </Button>
             </Box>
           </Stack>
@@ -182,9 +183,14 @@ export const DeleteCategory = ({
                       color: '#ffffff',
                       width: '65%',
                     }}
+                    data-cy='pick category'
                   >
                     {userCategories.map((category) => (
-                      <MenuItem key={category.id} value={category.id}>
+                      <MenuItem
+                        key={category.id}
+                        value={category.id}
+                        data-cyvalue={`delete ${category.category}`}
+                      >
                         {category.category}
                       </MenuItem>
                     ))}
@@ -208,7 +214,7 @@ export const DeleteCategory = ({
                   variant='warning'
                   onClick={() => setConfirmCategoryDelete(true)}
                 >
-                  <Delete />
+                  <Delete data-cy='Delete Category Icon' />
                 </Button>
               </Box>
             </Stack>{' '}

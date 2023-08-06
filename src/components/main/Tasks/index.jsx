@@ -84,12 +84,11 @@ const countTasks = (allTasks, priority) => {
         dueTime[2]
       );
       const taskDueDate = taskDue.toLocaleDateString();
-      const taskDueTime = taskDue.toLocaleTimeString();
       if (taskDueDate === new Date().toLocaleDateString()) {
         counts.today += 1;
         groups.todaysTasks.push(task);
 
-        if (taskDueTime < new Date().toLocaleTimeString()) {
+        if (taskDue.getTime() < new Date().getTime()) {
           counts.overdue += 1;
           groups.overdueTasks.push(task);
         }
@@ -176,9 +175,10 @@ const Tasks = ({ allTasks, taskPriorities }) => {
                 value={priority}
                 sx={{ fontSize: small && '1.0rem', height: '2.5rem' }}
                 onChange={(e) => taskPrioritySelectHandler(e)}
+                data-cy="tasks-priority"
               >
                 {taskPriorities.map((priority) => (
-                  <MenuItem key={priority.id} value={priority.id}>
+                  <MenuItem key={priority.id} value={priority.id} data-cyvalue={`${priority.name}`}>
                     {priority.name}
                   </MenuItem>
                 ))}
@@ -200,6 +200,7 @@ const Tasks = ({ allTasks, taskPriorities }) => {
               >
                 <ToggleButton
                   value='today'
+                  data-cy='today'
                   //disabled={counts.today === 0}
                   onClick={(e) => handleToggleButtonClick(e)}
                   sx={{
@@ -210,6 +211,7 @@ const Tasks = ({ allTasks, taskPriorities }) => {
                 </ToggleButton>
                 <ToggleButton
                   value='scheduled'
+                  data-cy='scheduled'
                   //disabled={counts.scheduled === 0}
                   onClick={(e) => handleToggleButtonClick(e)}
                   sx={{
@@ -220,6 +222,7 @@ const Tasks = ({ allTasks, taskPriorities }) => {
                 </ToggleButton>
                 <ToggleButton
                   value='overdue'
+                  data-cy='overdue'
                   //disabled={counts.overdue === 0}
                   onClick={(e) => handleToggleButtonClick(e)}
                   sx={{
@@ -230,6 +233,7 @@ const Tasks = ({ allTasks, taskPriorities }) => {
                 </ToggleButton>
                 <ToggleButton
                   value='done'
+                  data-cy='done'
                   //disabled={counts.done === 0}
                   onClick={(e) => handleToggleButtonClick(e)}
                   sx={{

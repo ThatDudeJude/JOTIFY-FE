@@ -1,5 +1,7 @@
 name: testing
 on: push
+env:
+  BASE_URL: ${{secrets.BASE_URL}}
 
 jobs:
   unit_and_integration_tests:

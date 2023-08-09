@@ -1,7 +1,6 @@
 import axios from 'axios';
+import 'dotenv/config';
 
-const apiClient = axios.create({ baseURL: 'http://127.0.0.1:8000/api/v1' });
-// const apiClient = axios.create({ baseURL: 'http://192.168.43.139:8000/api/v1' });
-// http://192.168.43.139:3000
+const apiClient = axios.create({ baseURL: ProcessingInstruction.env.BASE_URL });
 
 export default apiClient;

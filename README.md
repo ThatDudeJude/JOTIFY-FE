@@ -1,6 +1,6 @@
 # Jotify-Frontend
 
-The frontend application for Jotify, an web-based utility app for saving notes and to-do lists.
+The frontend application for Jotify, a simple online productivity app for saving notes and to-do lists.
 
 ## Project Description
 
@@ -39,11 +39,11 @@ To view the project you need to navigate to the generated url, http://localhost:
 For unit and integration tests,  
 npm users:
 ``` 
-    npm test
+npm test
 ```
 yarn users:
 ```
-  yarn test
+yarn test
 ```
 For end-to-end tests using [Cypress](https://docs.cypress.io/guides/getting-started/installing-cypress),
 npm users:

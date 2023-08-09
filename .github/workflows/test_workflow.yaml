@@ -1,7 +1,5 @@
 name: testing
 on: push
-env:
-  BASE_URL: ${{secrets.BASE_URL}}
 
 jobs:
   unit_and_integration_tests:
@@ -13,6 +11,10 @@ jobs:
         uses: actions/setup-node@v1
         with:
           node-version: '16.14.0'
+      - name: create env file
+        run: |
+          touch .env
+          echo BASE_URL=${{secrets.BASE_URL}}
       - name: Install app dependencies
         run: npm install
       - name: Run the tests

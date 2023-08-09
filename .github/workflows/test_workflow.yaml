@@ -1,5 +1,7 @@
 name: testing
 on: push
+env: 
+  CI: false
 
 jobs:
   unit_and_integration_tests:

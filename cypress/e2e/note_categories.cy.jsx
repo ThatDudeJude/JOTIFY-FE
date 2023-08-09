@@ -558,7 +558,7 @@ describe('Update and Delete Note Test', () => {
     allCategories.all_user_categories.push(
       allCategories.all_user_note_types[2]
     );
-    console.log(allCategories.all_user_note_types);
+    
     let newNote = {
       id: 4,
       note_category: { id: 3, name: 'Note Category 2' },
@@ -773,7 +773,7 @@ describe('Update and Delete Note Test', () => {
 
     allCategories.all_user_categories.pop();
     allCategories.all_user_note_types.pop();
-    console.log(allCategories);
+    
     categorizedNotes = [];
     allNotes = { author_notes: [...quickNotes, ...categorizedNotes] };
     cy.writeFile('cypress/fixtures/all_notes.json', allNotes);

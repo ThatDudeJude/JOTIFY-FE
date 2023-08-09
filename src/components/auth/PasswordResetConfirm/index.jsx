@@ -132,8 +132,7 @@ const PasswordResetConfirm = ({ setAuthForm, setAuthModal }) => {
             <Link
               component='button'
               variant='button'
-              onClick={() => {
-                console.log('Clicked');
+              onClick={() => {                
                 setAuthModal(true);
                 setAuthForm('login');
                 navigate('/app');

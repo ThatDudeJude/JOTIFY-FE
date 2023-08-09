@@ -64,7 +64,7 @@ describe('Signup Authentication Form', () => {
     await userEvent.type(password2Input, '1qW@3eR$5tY^7u');
 
     const submitButton = await screen.findByRole('button', {
-      name: /Register/,
+      name: /Register Account/,
     });
     expect(submitButton.hasAttribute('disabled')).toBe(false);
     //
@@ -72,7 +72,7 @@ describe('Signup Authentication Form', () => {
   test('signup form submit', async () => {
     const registerResponse = Promise.resolve({
       data: {},
-      status: 200,
+      status: 201,
       statusText: 'Ok',
       headers: {},
       config: {},
@@ -104,7 +104,7 @@ describe('Signup Authentication Form', () => {
     await userEvent.type(password2Input, '1qW@3eR$5tY^7u');
 
     const submitButton = await screen.findByRole('button', {
-      name: /Register/,
+      name: /Register Account/,
     });
 
     await userEvent.click(submitButton);
@@ -147,7 +147,7 @@ describe('Signup Authentication Form', () => {
     const password2Input = await screen.findByLabelText(/Confirm Password/);
     await userEvent.type(password2Input, '1qW@3eR$5tY^7u');
     const submitButton = await screen.findByRole('button', {
-      name: /Register/,
+      name: /Register Account/,
     });
 
     await userEvent.click(submitButton);
@@ -185,7 +185,7 @@ describe('Login Authentication Form', () => {
     expect(password1Input.value).toBe('1qW@3eR$5tY^7u');
 
     const submitButton = await screen.findByRole('button', {
-      name: /Login/,
+      name: /Sign In/,
     });
     expect(submitButton.hasAttribute('disabled')).toBe(false);
   }, 7000);
@@ -221,7 +221,7 @@ describe('Login Authentication Form', () => {
     await userEvent.type(password1Input, '1qW@3eR$5tY^7u');
 
     const submitButton = await screen.findByRole('button', {
-      name: /Login/,
+      name: /Sign In/,
     });
 
     await userEvent.click(submitButton);
@@ -260,7 +260,7 @@ describe('Login Authentication Form', () => {
     const password1Input = await screen.findByLabelText(/^Password/);
     await userEvent.type(password1Input, '1qW@3eR$5tY^7u');
     const submitButton = await screen.findByRole('button', {
-      name: /Login/,
+      name: /Sign In/,
     });
     await userEvent.click(submitButton);
 

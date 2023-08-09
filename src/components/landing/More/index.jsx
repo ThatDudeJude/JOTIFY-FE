@@ -101,7 +101,7 @@ const More = ({ learnMoreScope, setAuthModal, setAuthForm }) => {
             titleIcon: <CalendarMonth sx={{ fontSize: '3rem' }} />,
             itemIcon: <TaskAlt />,
             listItems: [
-              'Save to-do reminders',
+              'Save to-do tasks',
               'Prioritize and specify task deadlines.',
             ],
           },

@@ -178,9 +178,6 @@ describe('New Note Test', () => {
       allNotes = { author_notes: [...quickNotes, ...categorizedNotes] };
       cy.writeFile('cypress/fixtures/all_notes.json', allNotes);
       cy.wait('@fetchNewNote');
-      //.then((interception) => {
-      //console.log(interception);
-      //});
     });
     cy.wait(3000);
     cy.contains('First Quick Note').should('be.visible');

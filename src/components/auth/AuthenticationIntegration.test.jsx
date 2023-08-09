@@ -29,14 +29,14 @@ describe('Registration and Login', () => {
     const password2Input = await screen.findByLabelText(/^Confirm Password/);
     await userEvent.type(password2Input, '1qW@3eR$5tY^7u');
 
-    const submitButtons = await screen.findAllByRole('button', {
-      name: /Register/,
+    const submitButton = await screen.findByRole('button', {
+      name: /Register Account/,
     });
 
-    await userEvent.click(submitButtons[0]);
+    await userEvent.click(submitButton);
 
     expect(
-      await screen.findByText(/^Don't have an account/)
+      await screen.findByText(/Already have an account\? Login/)
     ).toBeInTheDocument();
   }, 15000);
 
@@ -86,8 +86,12 @@ describe('Registration and Login', () => {
     await userEvent.type(password1Input, '1qW@3eR$5tY^7u');
     expect(password1Input.value).toBe('1qW@3eR$5tY^7u');
 
+    expect(
+      await screen.findByText(/Don't have an account\? Register/)
+    ).toBeInTheDocument();
+
     const submitButtons = await screen.findAllByRole('button', {
-      name: /Login/,
+      name: /Sign In/,
     });
     await userEvent.click(submitButtons[0]);
 

@@ -1,6 +1,6 @@
 name: testing
 on: push
-env: 
+env:
   CI: false
 
 jobs:
@@ -34,12 +34,6 @@ jobs:
         run: |
           touch .env
           echo REACT_APP_BASE_URL=${{ secrets.BASE_URL }} >> .env
-      - name: Install app dependencies
-        run: npm install
-      #- name: Run the tests
-      #  run: npm test
-      #- name: Install app dependencies
-      #  run: npm install
       - name: Cypress run
         uses: cypress-io/github-action@v5
         with:

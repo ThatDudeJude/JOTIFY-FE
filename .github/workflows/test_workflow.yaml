@@ -16,7 +16,7 @@ jobs:
       - name: create env file
         run: |
           touch .env
-          echo REACT_APP_BASE_URL=${{ secrets.BASE_URL }} >> .env
+          echo REACT_APP_API_BASE_URL=${{ secrets.BASE_URL }} >> .env
       - name: Install app dependencies
         run: npm install
       - name: Run the tests
@@ -33,7 +33,7 @@ jobs:
       - name: create env file
         run: |
           touch .env
-          echo REACT_APP_BASE_URL=${{ secrets.BASE_URL }} >> .env
+          echo REACT_APP_API_BASE_URL=${{ secrets.BASE_URL }} >> .env
       - name: Cypress run
         uses: cypress-io/github-action@v6
         with:

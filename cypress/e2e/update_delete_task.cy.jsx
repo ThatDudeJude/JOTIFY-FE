@@ -21,7 +21,7 @@ describe('Update and Delete Task', () => {
     cy.intercept(
       {
         method: 'POST',
-        url: 'http://127.0.0.1:8000/api/v1/auth/login/',
+        url: `${process.env.REACT_APP_API_BASE_URL}/auth/login/`,
       },
       {
         statusCode: 201,
@@ -50,7 +50,7 @@ describe('Update and Delete Task', () => {
     cy.intercept(
       {
         method: 'GET',
-        url: 'http://127.0.0.1:8000/api/v1/notes/all-notes-categories/',
+        url: `${process.env.REACT_APP_API_BASE_URL}/notes/all-notes-categories/`,
       },
       {
         statusCode: 200,
@@ -65,7 +65,7 @@ describe('Update and Delete Task', () => {
     cy.intercept(
       {
         method: 'GET',
-        url: 'http://127.0.0.1:8000/api/v1/notes/all/',
+        url: `${process.env.REACT_APP_API_BASE_URL}/notes/all/`,
       },
       {
         statusCode: 200,
@@ -97,7 +97,7 @@ describe('Update and Delete Task', () => {
     cy.intercept(
       {
         method: 'GET',
-        url: 'http://127.0.0.1:8000/api/v1/tasks/',
+        url: `${process.env.REACT_APP_API_BASE_URL}/tasks/`,
       },
       {
         statusCode: 200,
@@ -117,7 +117,7 @@ describe('Update and Delete Task', () => {
     cy.intercept(
       {
         method: 'GET',
-        url: 'http://127.0.0.1:8000/api/v1/tasks/task/1',
+        url: `${process.env.REACT_APP_API_BASE_URL}/tasks/task/1`,
       },
       {
         statusCode: 200,
@@ -213,7 +213,7 @@ describe('Update and Delete Task', () => {
     cy.intercept(
       {
         method: 'PUT',
-        url: `http://127.0.0.1:8000/api/v1/tasks/task/${savedTask.id}`,
+        url: `${process.env.REACT_APP_API_BASE_URL}/tasks/task/${savedTask.id}`,
       },
       {
         statusCode: 200,
@@ -228,7 +228,7 @@ describe('Update and Delete Task', () => {
     cy.intercept(
       {
         method: 'GET',
-        url: `http://127.0.0.1:8000/api/v1/tasks/task/${savedTask.id}`,
+        url: `${process.env.REACT_APP_API_BASE_URL}/tasks/task/${savedTask.id}`,
       },
       {
         statusCode: 200,
@@ -258,7 +258,7 @@ describe('Update and Delete Task', () => {
     cy.intercept(
       {
         method: 'GET',
-        url: 'http://127.0.0.1:8000/api/v1/tasks/',
+        url: `${process.env.REACT_APP_API_BASE_URL}/tasks/`,
       },
       {
         statusCode: 200,
@@ -295,7 +295,7 @@ describe('Update and Delete Task', () => {
     cy.intercept(
       {
         method: 'GET',
-        url: 'http://127.0.0.1:8000/api/v1/tasks/',
+        url: `${process.env.REACT_APP_API_BASE_URL}/tasks/`,
       },
       {
         statusCode: 200,
@@ -315,7 +315,7 @@ describe('Update and Delete Task', () => {
     cy.intercept(
       {
         method: 'GET',
-        url: 'http://127.0.0.1:8000/api/v1/tasks/task/1',
+        url: `${process.env.REACT_APP_API_BASE_URL}/tasks/task/1`,
       },
       {
         statusCode: 200,
@@ -351,7 +351,7 @@ describe('Update and Delete Task', () => {
     cy.intercept(
       {
         method: 'DELETE',
-        url: `http://127.0.0.1:8000/api/v1/tasks/task/${savedTask.id}`,
+        url: `${process.env.REACT_APP_API_BASE_URL}/tasks/task/${savedTask.id}`,
       },
       {
         statusCode: 200,
@@ -365,7 +365,7 @@ describe('Update and Delete Task', () => {
     cy.intercept(
       {
         method: 'GET',
-        url: 'http://127.0.0.1:8000/api/v1/tasks/',
+        url: '${process.env.REACT_APP_API_BASE_URL}/tasks/',
       },
       {
         statusCode: 200,

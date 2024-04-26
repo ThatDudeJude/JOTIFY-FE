@@ -29,7 +29,7 @@ describe('New Note Test', () => {
     cy.intercept(
       {
         method: 'POST',
-        url: 'http://127.0.0.1:8000/api/v1/auth/login/',
+        url: `${process.env.REACT_APP_API_BASE_URL}/auth/login/`,
       },
       {
         statusCode: 201,
@@ -59,7 +59,7 @@ describe('New Note Test', () => {
     cy.intercept(
       {
         method: 'GET',
-        url: 'http://127.0.0.1:8000/api/v1/notes/all-notes-categories/', // Existing Notes
+        url: `${process.env.REACT_APP_API_BASE_URL}/notes/all-notes-categories/`, // Existing Notes
       },
       {
         statusCode: 200,
@@ -74,7 +74,7 @@ describe('New Note Test', () => {
     cy.intercept(
       {
         method: 'GET',
-        url: 'http://127.0.0.1:8000/api/v1/notes/all/',
+        url: `${process.env.REACT_APP_API_BASE_URL}/notes/all/`,
       },
       {
         statusCode: 200,
@@ -99,7 +99,7 @@ describe('New Note Test', () => {
     cy.intercept(
       {
         method: 'GET',
-        url: 'http://127.0.0.1:8000/api/v1/notes/user-note-types/', // ALl user's note types
+        url: `${process.env.REACT_APP_API_BASE_URL}/notes/user-note-types/`, // ALl user's note types
       },
       {
         statusCode: 200,
@@ -133,7 +133,7 @@ describe('New Note Test', () => {
     cy.intercept(
       {
         method: 'POST',
-        url: 'http://127.0.0.1:8000/api/v1/notes/create/new/',
+        url: `${process.env.REACT_APP_API_BASE_URL}/notes/create/new/`,
       },
       {
         statusCode: 200,
@@ -147,7 +147,7 @@ describe('New Note Test', () => {
     cy.intercept(
       {
         method: 'GET',
-        url: 'http://127.0.0.1:8000/api/v1/notes/quick-note/1',
+        url: `${process.env.REACT_APP_API_BASE_URL}/notes/quick-note/1`,
       },
       {
         statusCode: 200,
@@ -185,7 +185,7 @@ describe('New Note Test', () => {
     cy.intercept(
       {
         method: 'GET',
-        url: 'http://127.0.0.1:8000/api/v1/notes/all-notes-categories/',
+        url: `${process.env.REACT_APP_API_BASE_URL}/notes/all-notes-categories/`,
       },
       {
         statusCode: 200,
@@ -200,7 +200,7 @@ describe('New Note Test', () => {
     cy.intercept(
       {
         method: 'GET',
-        url: 'http://127.0.0.1:8000/api/v1/notes/all/',
+        url: `${process.env.REACT_APP_API_BASE_URL}/notes/all/`,
       },
       {
         statusCode: 200,

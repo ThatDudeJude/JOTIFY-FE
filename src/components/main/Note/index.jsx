@@ -140,9 +140,10 @@ const Note = ({ token, setToken }) => {
         });
     }
     if (action !== 'view') {
-      console.log('View');
+      console.log('Not iew');
       getAllUserCategories(apiClient, token)
         .then((categoriesResponse) => {
+          console.log('Got user categories response');
           if (
             categoriesResponse.status === 200 &&
             categoriesResponse.statusText === 'OK'

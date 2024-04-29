@@ -121,8 +121,7 @@ const Note = ({ token, setToken }) => {
     if (categoryId >= 1) {
       getNote(apiClient, token, categoryId, noteId)
         .then((response) => {
-          if (response.status === 200 && response.statusText === 'OK')
-            setNote(response.data);
+          if (response.status === 200) setNote(response.data);
         })
         .catch((error) => {
           if (error.response) {
@@ -148,10 +147,7 @@ const Note = ({ token, setToken }) => {
             'status',
             categoriesResponse
           );
-          if (
-            categoriesResponse.status === 200 &&
-            categoriesResponse.statusText === 'OK'
-          ) {
+          if (categoriesResponse.status === 200) {
             const userNoteTypes = categoriesResponse.data.all_user_note_types;
             console.log('userNoteTypes', userNoteTypes);
             setUserCategories(userNoteTypes);

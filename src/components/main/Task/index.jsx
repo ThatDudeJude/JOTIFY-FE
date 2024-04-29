@@ -114,8 +114,7 @@ const Task = ({ token, setToken }) => {
     if (taskId >= 1) {
       getTask(apiClient, token, taskId)
         .then((response) => {
-          if (response.status === 200 && response.statusText === 'OK')
-            setTask(response.data);
+          if (response.status === 200) setTask(response.data);
         })
         .catch((error) => {
           if (error.response) {

@@ -77,12 +77,7 @@ const Body = ({
         getAllNotes(apiClient, token, category.name, category.id),
       ])
         .then(([categoriesResponse, notesResponse]) => {
-          if (
-            categoriesResponse.status === 200 &&
-            categoriesResponse.statusText === 'OK' &&
-            notesResponse.status === 200 &&
-            notesResponse.statusText === 'OK'
-          )
+          if (categoriesResponse.status === 200 && notesResponse.status === 200)
             // setIsLoading(true);
             setNotesTabData({
               ...notesTabData,
@@ -110,7 +105,7 @@ const Body = ({
     } else if (currentTab === 'tasks') {
       getAllTasks(apiClient, token)
         .then((tasksResponse) => {
-          if (tasksResponse.status === 200 && tasksResponse.statusText === 'OK')
+          if (tasksResponse.status === 200)
             setTasksTabData({
               priorities: tasksTabData.priorities,
               tasks: tasksResponse.data,

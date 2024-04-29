@@ -140,6 +140,7 @@ const Note = ({ token, setToken }) => {
         });
     }
     if (action !== 'view') {
+      console.log('View');
       getAllUserCategories(apiClient, token)
         .then((categoriesResponse) => {
           if (

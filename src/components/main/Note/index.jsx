@@ -139,17 +139,10 @@ const Note = ({ token, setToken }) => {
         });
     }
     if (action !== 'view') {
-      console.log('Not iew');
       getAllUserCategories(apiClient, token)
         .then((categoriesResponse) => {
-          console.log(
-            'Got user categories response',
-            'status',
-            categoriesResponse
-          );
           if (categoriesResponse.status === 200) {
             const userNoteTypes = categoriesResponse.data.all_user_note_types;
-            console.log('userNoteTypes', userNoteTypes);
             setUserCategories(userNoteTypes);
           }
         })

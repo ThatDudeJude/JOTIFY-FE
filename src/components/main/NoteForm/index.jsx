@@ -452,7 +452,7 @@ const NoteForm = ({
                   >
                     Category:
                   </FormLabel>
-                  {userCategories.length && (
+                  {userCategories && (
                     <Select
                       name='note_category'
                       data-testid='category_select'

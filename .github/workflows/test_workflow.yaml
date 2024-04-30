@@ -2,7 +2,7 @@ name: testing
 on: push
 env:
   CI: false
-  REACT_APP_API_BASE_URL: ${{ secrets.BASE_URL }}
+  # REACT_APP_API_BASE_URL: ${{ secrets.BASE_URL }}
 jobs:
   unit_and_integration_tests:
     runs-on: ubuntu-20.04

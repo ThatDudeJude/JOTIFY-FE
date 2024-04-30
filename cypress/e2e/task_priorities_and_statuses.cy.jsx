@@ -131,7 +131,7 @@ describe('Task Priorities and Statuses', () => {
     cy.intercept(
       {
         method: 'POST',
-        url: `/auth/login/`,
+        url: `${process.env.REACT_APP_API_BASE_URL}/auth/login/`,
       },
       {
         statusCode: 201,
@@ -160,7 +160,7 @@ describe('Task Priorities and Statuses', () => {
     cy.intercept(
       {
         method: 'GET',
-        url: `/notes/all-notes-categories/`,
+        url: `${process.env.REACT_APP_API_BASE_URL}/notes/all-notes-categories/`,
       },
       {
         statusCode: 200,
@@ -175,7 +175,7 @@ describe('Task Priorities and Statuses', () => {
     cy.intercept(
       {
         method: 'GET',
-        url: `/notes/all/`,
+        url: `${process.env.REACT_APP_API_BASE_URL}/notes/all/`,
       },
       {
         statusCode: 200,
@@ -193,7 +193,7 @@ describe('Task Priorities and Statuses', () => {
     cy.intercept(
       {
         method: 'GET',
-        url: `/tasks/`,
+        url: `${process.env.REACT_APP_API_BASE_URL}/tasks/`,
       },
       {
         statusCode: 200,

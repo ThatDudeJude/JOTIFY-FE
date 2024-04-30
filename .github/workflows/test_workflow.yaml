@@ -2,7 +2,7 @@ name: testing
 on: push
 env:
   CI: false
-
+  REACT_APP_API_BASE_URL: ${{ secrets.BASE_URL }}
 jobs:
   unit_and_integration_tests:
     runs-on: ubuntu-20.04
@@ -31,9 +31,9 @@ jobs:
         with:
           node-version: '16.14.0'
       - name: create env file
-        run: |
-          touch .env
-          echo REACT_APP_API_BASE_URL=${{ secrets.BASE_URL }} >> .env
+        # run: |
+        # touch .env
+        # echo REACT_APP_API_BASE_URL=${{ secrets.BASE_URL }} >> .env
       - name: Cypress run
         uses: cypress-io/github-action@v6
         with:

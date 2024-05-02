@@ -32,11 +32,11 @@ jobs:
         uses: actions/setup-node@v1
         with:
           node-version: '16.14.0'
-      - name: create env file
-        run: |
-          touch .env
-          echo REACT_APP_API_BASE_URL=${{ secrets.BASE_URL }} >> .env
-          cat .env
+      # - name: create env file
+      # run: |
+      #   touch .env
+      #   echo REACT_APP_API_BASE_URL=${{ secrets.BASE_URL }} >> .env
+      #   cat .env
       # env:
       # REACT_APP_API_BASE_URL: ${{ secrets.BASE_URL }}
       - name: Cypress run
@@ -45,3 +45,5 @@ jobs:
           build: npm run build
           start: npm start
           wait-on: 'http://localhost:3000'
+        env:
+          REACT_APP_API_BASE_URL: ${{ secrets.BASE_URL }}

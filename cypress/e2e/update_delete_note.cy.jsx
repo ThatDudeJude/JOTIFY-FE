@@ -42,7 +42,7 @@ describe('Update and Delete Note Test', () => {
     cy.intercept(
       {
         method: 'POST',
-        url: `${process.env.REACT_APP_API_BASE_URL}/auth/login/`,
+        url: `/auth/login/`,
       },
       {
         statusCode: 201,
@@ -80,7 +80,7 @@ describe('Update and Delete Note Test', () => {
     cy.intercept(
       {
         method: 'GET',
-        url: `${process.env.REACT_APP_API_BASE_URL}/notes/all-notes-categories/`,
+        url: `/notes/all-notes-categories/`,
       },
       {
         statusCode: 200,
@@ -95,7 +95,7 @@ describe('Update and Delete Note Test', () => {
     cy.intercept(
       {
         method: 'GET',
-        url: `${process.env.REACT_APP_API_BASE_URL}/notes/all/`,
+        url: `/notes/all/`,
       },
       {
         statusCode: 200,
@@ -110,7 +110,7 @@ describe('Update and Delete Note Test', () => {
     cy.intercept(
       {
         method: 'GET',
-        url: `${process.env.REACT_APP_API_BASE_URL}/notes/user-note-types/`, // ALl user's note types
+        url: `/notes/user-note-types/`, // ALl user's note types
       },
       {
         statusCode: 200,
@@ -134,7 +134,7 @@ describe('Update and Delete Note Test', () => {
     cy.intercept(
       {
         method: 'GET',
-        url: `${process.env.REACT_APP_API_BASE_URL}/notes/categorized-note/2`,
+        url: `/notes/categorized-note/2`,
       },
       {
         statusCode: 200,
@@ -176,7 +176,7 @@ describe('Update and Delete Note Test', () => {
     cy.intercept(
       {
         method: 'PUT',
-        url: `${process.env.REACT_APP_API_BASE_URL}/notes/categorized-note/update/2/`,
+        url: `/notes/categorized-note/update/2/`,
       },
       {
         statusCode: 200,
@@ -190,7 +190,7 @@ describe('Update and Delete Note Test', () => {
     cy.intercept(
       {
         method: 'GET',
-        url: `${process.env.REACT_APP_API_BASE_URL}/notes/categorized-note/2`,
+        url: `/notes/categorized-note/2`,
       },
       {
         statusCode: 200,
@@ -229,7 +229,7 @@ describe('Update and Delete Note Test', () => {
     cy.intercept(
       {
         method: 'GET',
-        url: `${process.env.REACT_APP_API_BASE_URL}/notes/all-notes-categories/`,
+        url: `/notes/all-notes-categories/`,
       },
       {
         statusCode: 200,
@@ -244,7 +244,7 @@ describe('Update and Delete Note Test', () => {
     cy.intercept(
       {
         method: 'GET',
-        url: `${process.env.REACT_APP_API_BASE_URL}/notes/all/`,
+        url: `/notes/all/`,
       },
       {
         statusCode: 200,
@@ -259,7 +259,7 @@ describe('Update and Delete Note Test', () => {
     cy.intercept(
       {
         method: 'GET',
-        url: `${process.env.REACT_APP_API_BASE_URL}/notes/user-note-types/`, // ALl user's note types
+        url: `/notes/user-note-types/`, // ALl user's note types
       },
       {
         statusCode: 200,
@@ -289,7 +289,7 @@ describe('Update and Delete Note Test', () => {
     cy.intercept(
       {
         method: 'GET',
-        url: `${process.env.REACT_APP_API_BASE_URL}/notes/all-notes-categories/`,
+        url: `/notes/all-notes-categories/`,
       },
       {
         statusCode: 200,
@@ -304,7 +304,7 @@ describe('Update and Delete Note Test', () => {
     cy.intercept(
       {
         method: 'GET',
-        url: `${process.env.REACT_APP_API_BASE_URL}/notes/all/`,
+        url: `/notes/all/`,
       },
       {
         statusCode: 200,
@@ -319,7 +319,7 @@ describe('Update and Delete Note Test', () => {
     cy.intercept(
       {
         method: 'GET',
-        url: `${process.env.REACT_APP_API_BASE_URL}/notes/user-note-types/`, // ALl user's note types
+        url: `/notes/user-note-types/`, // ALl user's note types
       },
       {
         statusCode: 200,
@@ -343,7 +343,7 @@ describe('Update and Delete Note Test', () => {
     cy.intercept(
       {
         method: 'GET',
-        url: `${process.env.REACT_APP_API_BASE_URL}/notes/categorized-note/2`,
+        url: `/notes/categorized-note/2`,
       },
       {
         statusCode: 200,
@@ -379,7 +379,7 @@ describe('Update and Delete Note Test', () => {
     cy.intercept(
       {
         method: 'DELETE',
-        url: `${process.env.REACT_APP_API_BASE_URL}/notes/categorized-note/delete/2/`,
+        url: `/notes/categorized-note/delete/2/`,
       },
       {
         statusCode: 200,
@@ -393,7 +393,7 @@ describe('Update and Delete Note Test', () => {
     cy.intercept(
       {
         method: 'GET',
-        url: `${process.env.REACT_APP_API_BASE_URL}/notes/all/`,
+        url: `/notes/all/`,
       },
       {
         statusCode: 200,

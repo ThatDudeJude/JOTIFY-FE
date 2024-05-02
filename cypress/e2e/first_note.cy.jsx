@@ -29,7 +29,7 @@ describe('New Note Test', () => {
     cy.intercept(
       {
         method: 'POST',
-        url: `${process.env.REACT_APP_API_BASE_URL}/auth/login/`,
+        url: `/auth/login/`,
       },
       {
         statusCode: 201,
@@ -59,7 +59,7 @@ describe('New Note Test', () => {
     cy.intercept(
       {
         method: 'GET',
-        url: `${process.env.REACT_APP_API_BASE_URL}/notes/all-notes-categories/`, // Existing Notes
+        url: `/notes/all-notes-categories/`, // Existing Notes
       },
       {
         statusCode: 200,
@@ -74,7 +74,7 @@ describe('New Note Test', () => {
     cy.intercept(
       {
         method: 'GET',
-        url: `${process.env.REACT_APP_API_BASE_URL}/notes/all/`,
+        url: `/notes/all/`,
       },
       {
         statusCode: 200,
@@ -99,7 +99,7 @@ describe('New Note Test', () => {
     cy.intercept(
       {
         method: 'GET',
-        url: `${process.env.REACT_APP_API_BASE_URL}/notes/user-note-types/`, // ALl user's note types
+        url: `/notes/user-note-types/`, // ALl user's note types
       },
       {
         statusCode: 200,
@@ -133,7 +133,7 @@ describe('New Note Test', () => {
     cy.intercept(
       {
         method: 'POST',
-        url: `${process.env.REACT_APP_API_BASE_URL}/notes/create/new/`,
+        url: `/notes/create/new/`,
       },
       {
         statusCode: 200,
@@ -147,7 +147,7 @@ describe('New Note Test', () => {
     cy.intercept(
       {
         method: 'GET',
-        url: `${process.env.REACT_APP_API_BASE_URL}/notes/quick-note/1`,
+        url: `/notes/quick-note/1`,
       },
       {
         statusCode: 200,
@@ -185,7 +185,7 @@ describe('New Note Test', () => {
     cy.intercept(
       {
         method: 'GET',
-        url: `${process.env.REACT_APP_API_BASE_URL}/notes/all-notes-categories/`,
+        url: `/notes/all-notes-categories/`,
       },
       {
         statusCode: 200,
@@ -200,7 +200,7 @@ describe('New Note Test', () => {
     cy.intercept(
       {
         method: 'GET',
-        url: `${process.env.REACT_APP_API_BASE_URL}/notes/all/`,
+        url: `/notes/all/`,
       },
       {
         statusCode: 200,

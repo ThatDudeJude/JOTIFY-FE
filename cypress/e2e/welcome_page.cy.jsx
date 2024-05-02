@@ -28,7 +28,7 @@ describe('Welcome Page', () => {
     cy.intercept(
       {
         method: 'POST',
-        url: `${process.env.REACT_APP_API_BASE_URL}/auth/signup/`,
+        url: `/auth/signup/`,
       },
       {
         statusCode: 400,
@@ -98,7 +98,7 @@ describe('Welcome Page', () => {
     cy.intercept(
       {
         method: 'POST',
-        url: `${process.env.REACT_APP_API_BASE_URL}/auth/signup/`,
+        url: `/auth/signup/`,
       },
       {
         statusCode: 201,
@@ -129,7 +129,7 @@ describe('Welcome Page', () => {
     cy.intercept(
       {
         method: 'POST',
-        url: `${process.env.REACT_APP_API_BASE_URL}/auth/login/`,
+        url: `/auth/login/`,
       },
       {
         statusCode: 400,
@@ -167,7 +167,7 @@ describe('Welcome Page', () => {
     cy.intercept(
       {
         method: 'POST',
-        url: `${process.env.REACT_APP_API_BASE_URL}/auth/login/`,
+        url: `/auth/login/`,
       },
       {
         statusCode: 201,

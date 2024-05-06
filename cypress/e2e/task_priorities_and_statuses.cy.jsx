@@ -323,8 +323,8 @@ describe('Task Priorities and Statuses', () => {
     cy.contains('No tasks due today.').should('not.exist');
     cy.findByRole('link', { name: /Add Task/ }).should('not.exist');
     cy.contains('New Task One Today').should('be.visible');
-    // cy.contains('New Task Two Today').should('be.visible');
-    // cy.contains('New Task Three Today').should('be.visible');
+    cy.contains('New Task Two Today').should('be.visible');
+    cy.contains('New Task Three Today').should('be.visible');
 
     // cy.get('button[data-cy="scheduled"]').should('be.visible').click();
     // cy.contains('No scheduled tasks.').should('not.exist');

@@ -313,13 +313,34 @@ describe('Task Priorities and Statuses', () => {
     cy.contains('New Task Nine Done').should('be.visible');
   });
   it('Check all Statuses', () => {
+    cy.intercept(
+      {
+        method: 'GET',
+        url: `/tasks/`,
+      },
+      {
+        statusCode: 200,
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        fixture: 'all_tasks.json',
+        delayMs: 100,
+      }
+    ).as('fetchTasks');
+
+    cy.findByRole('tab', { name: /My Tasks/ }, { timeout: 8000 })
+      .should('be.visible')
+      .click()
+      .then(() => {
+        cy.wait('@fetchTasks');
+      });
     cy.wait(4000);
-    // cy.get('button[data-cy="today"]').should('be.visible').click();
-    // cy.contains('No tasks due today.').should('not.exist');
-    // cy.findByRole('link', { name: /Add Task/ }).should('not.exist');
-    // cy.contains('New Task One Today').should('be.visible');
-    // cy.contains('New Task Two Today').should('be.visible');
-    // cy.contains('New Task Three Today').should('be.visible');
+    cy.get('button[data-cy="today"]').should('be.visible').click();
+    cy.contains('No tasks due today.').should('not.exist');
+    cy.findByRole('link', { name: /Add Task/ }).should('not.exist');
+    cy.contains('New Task One Today').should('be.visible');
+    cy.contains('New Task Two Today').should('be.visible');
+    cy.contains('New Task Three Today').should('be.visible');
 
     cy.get('button[data-cy="scheduled"]').should('be.visible').click();
     cy.contains('No scheduled tasks.').should('not.exist');

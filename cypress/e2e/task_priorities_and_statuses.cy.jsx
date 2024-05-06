@@ -212,36 +212,7 @@ describe('Task Priorities and Statuses', () => {
         cy.wait('@fetchTasks');
       });
   });
-  it('Check all Statuses', () => {
-    cy.wait(4000);
-    cy.get('button[data-cy="today"]').should('be.visible').click();
-    cy.contains('No tasks due today.').should('not.exist');
-    cy.findByRole('link', { name: /Add Task/ }).should('not.exist');
-    cy.contains('New Task One Today').should('be.visible');
-    cy.contains('New Task Two Today').should('be.visible');
-    cy.contains('New Task Three Today').should('be.visible');
 
-    cy.get('button[data-cy="scheduled"]').should('be.visible').click();
-    cy.contains('No scheduled tasks.').should('not.exist');
-    cy.findByRole('link', { name: /Add Task/ }).should('not.exist');
-    cy.contains('New Task Ten Scheduled').should('be.visible');
-    cy.contains('New Task Eleven Scheduled').should('be.visible');
-    cy.contains('New Task Twelve Scheduled').should('be.visible');
-
-    cy.get('button[data-cy="overdue"]').should('be.visible').click();
-    cy.contains('No overdue tasks.').should('not.exist');
-    cy.findByRole('link', { name: /Add Task/ }).should('not.exist');
-    cy.contains('New Task Four Overdue').should('be.visible');
-    cy.contains('New Task Five Overdue').should('be.visible');
-    cy.contains('New Task Six Overdue').should('be.visible');
-
-    cy.get('button[data-cy="done"]').should('be.visible').click();
-    cy.contains('No done tasks.').should('not.exist');
-    cy.findByRole('link', { name: /Add Task/ }).should('not.exist');
-    cy.contains('New Task Seven Done').should('be.visible');
-    cy.contains('New Task Eight Done').should('be.visible');
-    cy.contains('New Task Nine Done').should('be.visible');
-  });
   it('View tasks based on priorities', () => {
     cy.wait(4000);
 
@@ -339,6 +310,36 @@ describe('Task Priorities and Statuses', () => {
     cy.findByRole('link', { name: /Add Task/ }).should('not.exist');
     cy.contains('New Task Seven Done').should('not.exist');
     cy.contains('New Task Eight Done').should('not.exist');
+    cy.contains('New Task Nine Done').should('be.visible');
+  });
+  it('Check all Statuses', () => {
+    cy.wait(4000);
+    cy.get('button[data-cy="today"]').should('be.visible').click();
+    cy.contains('No tasks due today.').should('not.exist');
+    cy.findByRole('link', { name: /Add Task/ }).should('not.exist');
+    cy.contains('New Task One Today').should('be.visible');
+    cy.contains('New Task Two Today').should('be.visible');
+    cy.contains('New Task Three Today').should('be.visible');
+
+    cy.get('button[data-cy="scheduled"]').should('be.visible').click();
+    cy.contains('No scheduled tasks.').should('not.exist');
+    cy.findByRole('link', { name: /Add Task/ }).should('not.exist');
+    cy.contains('New Task Ten Scheduled').should('be.visible');
+    cy.contains('New Task Eleven Scheduled').should('be.visible');
+    cy.contains('New Task Twelve Scheduled').should('be.visible');
+
+    cy.get('button[data-cy="overdue"]').should('be.visible').click();
+    cy.contains('No overdue tasks.').should('not.exist');
+    cy.findByRole('link', { name: /Add Task/ }).should('not.exist');
+    cy.contains('New Task Four Overdue').should('be.visible');
+    cy.contains('New Task Five Overdue').should('be.visible');
+    cy.contains('New Task Six Overdue').should('be.visible');
+
+    cy.get('button[data-cy="done"]').should('be.visible').click();
+    cy.contains('No done tasks.').should('not.exist');
+    cy.findByRole('link', { name: /Add Task/ }).should('not.exist');
+    cy.contains('New Task Seven Done').should('be.visible');
+    cy.contains('New Task Eight Done').should('be.visible');
     cy.contains('New Task Nine Done').should('be.visible');
   });
 });

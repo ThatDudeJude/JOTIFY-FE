@@ -1,6 +1,6 @@
 import React from 'react';
 import useMediaQuery from '@mui/material/useMediaQuery';
-import StickyNoteImage from '../../../imgs/lightbulb-flipped.png';
+import StickyNoteImage from '../../../imgs/lightbulb-flipped-comp.png';
 
 const generalStyle = {
   backgroundImage: `url(${StickyNoteImage})`,

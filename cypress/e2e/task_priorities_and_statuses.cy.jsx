@@ -317,7 +317,7 @@ describe('Task Priorities and Statuses', () => {
     cy.get('[data-cy="tasks-priority"]').click();
     cy.get('[data-cyvalue="Low"]').should('be.visible').click();
     cy.get('[data-cy="tasks-priority"]').click();
-    c.wait(3000)
+    cy.wait(3000);
     cy.get('[data-cyvalue="All"]').should('be.visible').click();
     cy.get('button[data-cy="today"]').should('be.visible').click();
     cy.contains('No tasks due today.').should('not.exist');

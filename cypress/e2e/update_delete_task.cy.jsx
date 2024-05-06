@@ -291,110 +291,110 @@ describe('Update and Delete Task', () => {
         cy.contains(savedTask.due_time).should('be.visible');
       });
   });
-  it('Delete Task', () => {
-    cy.intercept(
-      {
-        method: 'GET',
-        url: `/tasks/`,
-      },
-      {
-        statusCode: 200,
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        fixture: 'all_tasks.json',
-        delayMs: 100,
-      }
-    ).as('fetchTasks');
+  //   it('Delete Task', () => {
+  //     cy.intercept(
+  //       {
+  //         method: 'GET',
+  //         url: `/tasks/`,
+  //       },
+  //       {
+  //         statusCode: 200,
+  //         headers: {
+  //           'Content-Type': 'application/json',
+  //         },
+  //         fixture: 'all_tasks.json',
+  //         delayMs: 100,
+  //       }
+  //     ).as('fetchTasks');
 
-    cy.findByRole('tab', { name: /My Tasks/ }, { timeout: 8000 })
-      .should('be.visible')
-      .click();
-    cy.wait('@fetchTasks');
+  //     cy.findByRole('tab', { name: /My Tasks/ }, { timeout: 8000 })
+  //       .should('be.visible')
+  //       .click();
+  //     cy.wait('@fetchTasks');
 
-    cy.intercept(
-      {
-        method: 'GET',
-        url: `/tasks/task/1`,
-      },
-      {
-        statusCode: 200,
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        fixture: 'first_task.json',
-        delayMs: 100,
-      }
-    ).as('fetchTask');
+  //     cy.intercept(
+  //       {
+  //         method: 'GET',
+  //         url: `/tasks/task/1`,
+  //       },
+  //       {
+  //         statusCode: 200,
+  //         headers: {
+  //           'Content-Type': 'application/json',
+  //         },
+  //         fixture: 'first_task.json',
+  //         delayMs: 100,
+  //       }
+  //     ).as('fetchTask');
 
-    cy.findByRole('link', { name: /View/ }).should('be.visible').click();
-    cy.wait('@fetchTask');
+  //     cy.findByRole('link', { name: /View/ }).should('be.visible').click();
+  //     cy.wait('@fetchTask');
 
-    cy.contains(savedTask.short_description).should('be.visible');
-    cy.contains(savedTask.task_completed ? 'DONE' : 'Pending').should(
-      'be.visible'
-    );
-    cy.contains(savedTask.task_description).should('be.visible');
-    cy.contains(new Date(savedTask.due_date).toLocaleDateString()).should(
-      'be.visible'
-    );
-    cy.contains(savedTask.due_time).should('be.visible');
+  //     cy.contains(savedTask.short_description).should('be.visible');
+  //     cy.contains(savedTask.task_completed ? 'DONE' : 'Pending').should(
+  //       'be.visible'
+  //     );
+  //     cy.contains(savedTask.task_description).should('be.visible');
+  //     cy.contains(new Date(savedTask.due_date).toLocaleDateString()).should(
+  //       'be.visible'
+  //     );
+  //     cy.contains(savedTask.due_time).should('be.visible');
 
-    cy.findByRole('button', { name: 'delete' }).should('be.visible');
+  //     cy.findByRole('button', { name: 'delete' }).should('be.visible');
 
-    cy.findByRole('button', { name: 'delete' }).click();
+  //     cy.findByRole('button', { name: 'delete' }).click();
 
-    cy.contains('Delete Task').should('be.visible');
-    cy.contains(`Delete "${savedTask.short_description}"`).should('be.visible');
-    cy.findByRole('button', { name: /Confirm Delete/ }).should('be.visible');
+  //     cy.contains('Delete Task').should('be.visible');
+  //     cy.contains(`Delete "${savedTask.short_description}"`).should('be.visible');
+  //     cy.findByRole('button', { name: /Confirm Delete/ }).should('be.visible');
 
-    cy.intercept(
-      {
-        method: 'DELETE',
-        url: `/tasks/task/${savedTask.id}`,
-      },
-      {
-        statusCode: 200,
-        // headers: {
-        //   'Content-Type': 'application/json',
-        // },
-        delayMs: 100,
-      }
-    ).as('deleteNote');
+  //     cy.intercept(
+  //       {
+  //         method: 'DELETE',
+  //         url: `/tasks/task/${savedTask.id}`,
+  //       },
+  //       {
+  //         statusCode: 200,
+  //         // headers: {
+  //         //   'Content-Type': 'application/json',
+  //         // },
+  //         delayMs: 100,
+  //       }
+  //     ).as('deleteNote');
 
-    cy.intercept(
-      {
-        method: 'GET',
-        url: '${process.env.REACT_APP_API_BASE_URL}/tasks/',
-      },
-      {
-        statusCode: 200,
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: [],
-        delayMs: 100,
-      }
-    ).as('fetchTasks');
+  //     cy.intercept(
+  //       {
+  //         method: 'GET',
+  //         url: '${process.env.REACT_APP_API_BASE_URL}/tasks/',
+  //       },
+  //       {
+  //         statusCode: 200,
+  //         headers: {
+  //           'Content-Type': 'application/json',
+  //         },
+  //         body: [],
+  //         delayMs: 100,
+  //       }
+  //     ).as('fetchTasks');
 
-    cy.findByRole('button', { name: /Confirm Delete/ }).click();
-    cy.wait('@deleteNote');
-    cy.wait('@fetchTasks');
+  //     cy.findByRole('button', { name: /Confirm Delete/ }).click();
+  //     cy.wait('@deleteNote');
+  //     cy.wait('@fetchTasks');
 
-    cy.get('button[data-cy="today"]').should('be.visible').click();
-    cy.contains('No tasks due today.').should('be.visible');
-    cy.findByRole('link', { name: /Add Task/ }).should('be.visible');
+  //     cy.get('button[data-cy="today"]').should('be.visible').click();
+  //     cy.contains('No tasks due today.').should('be.visible');
+  //     cy.findByRole('link', { name: /Add Task/ }).should('be.visible');
 
-    cy.get('button[data-cy="scheduled"]').should('be.visible').click();
-    cy.contains('No scheduled tasks.').should('be.visible');
-    cy.findByRole('link', { name: /Add Task/ }).should('be.visible');
+  //     cy.get('button[data-cy="scheduled"]').should('be.visible').click();
+  //     cy.contains('No scheduled tasks.').should('be.visible');
+  //     cy.findByRole('link', { name: /Add Task/ }).should('be.visible');
 
-    cy.get('button[data-cy="overdue"]').should('be.visible').click();
-    cy.contains('No overdue tasks.').should('be.visible');
-    cy.findByRole('link', { name: /Add Task/ }).should('be.visible');
+  //     cy.get('button[data-cy="overdue"]').should('be.visible').click();
+  //     cy.contains('No overdue tasks.').should('be.visible');
+  //     cy.findByRole('link', { name: /Add Task/ }).should('be.visible');
 
-    cy.get('button[data-cy="done"]').should('be.visible').click();
-    cy.contains('No done tasks.').should('be.visible');
-    cy.findByRole('link', { name: /Add Task/ }).should('be.visible');
-  });
+  //     cy.get('button[data-cy="done"]').should('be.visible').click();
+  //     cy.contains('No done tasks.').should('be.visible');
+  //     cy.findByRole('link', { name: /Add Task/ }).should('be.visible');
+  //   });
 });

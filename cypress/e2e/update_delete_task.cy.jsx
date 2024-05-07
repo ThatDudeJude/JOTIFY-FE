@@ -115,6 +115,12 @@ describe('Update and Delete Task', () => {
       .click();
     cy.wait('@fetchNewTasks');
 
+    cy.get('[data-cy="tasks-priority"]').click();
+    cy.get('[data-cyvalue="Medium"]').should('be.visible').click();
+    cy.get('[data-cy="tasks-priority"]').click();
+    cy.wait(3000);
+    cy.get('[data-cyvalue="All"]').should('be.visible').click();
+
     cy.intercept(
       {
         method: 'GET',

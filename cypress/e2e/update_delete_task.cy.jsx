@@ -108,12 +108,12 @@ describe('Update and Delete Task', () => {
         fixture: 'all_new_tasks.json',
         delayMs: 100,
       }
-    ).as('fetchTasks');
+    ).as('fetchNewTasks');
 
     cy.findByRole('tab', { name: /My Tasks/ }, { timeout: 8000 })
       .should('be.visible')
       .click();
-    cy.wait('@fetchTasks');
+    cy.wait('@fetchNewTasks');
 
     cy.intercept(
       {
@@ -266,7 +266,7 @@ describe('Update and Delete Task', () => {
         headers: {
           'Content-Type': 'application/json',
         },
-        fixture: 'all_tasks.json',
+        fixture: 'all_new_tasks.json',
         delayMs: 100,
       }
     ).as('fetchUpdatedTasks');

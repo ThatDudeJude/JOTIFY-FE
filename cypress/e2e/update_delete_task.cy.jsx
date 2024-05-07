@@ -90,8 +90,9 @@ describe('Update and Delete Task', () => {
         task_priority: task.task_priority,
       };
       allTasks.push(savedTask);
-      cy.writeFile('cypress/fixtures/all_new_tasks.json', allTasks);
+      //   cy.writeFile('cypress/fixtures/all_new_tasks.json', allTasks);
     });
+    cy.writeFile('cypress/fixtures/all_new_tasks.json', allTasks);
   });
   it('Update Task', () => {
     cy.intercept(

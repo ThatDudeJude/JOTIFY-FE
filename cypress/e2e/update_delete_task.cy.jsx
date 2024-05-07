@@ -256,41 +256,41 @@ describe('Update and Delete Task', () => {
       cy.contains(savedTask.task_priority).should('be.visible');
     });
 
-    // cy.intercept(
-    //   {
-    //     method: 'GET',
-    //     url: `/tasks/`,
-    //   },
-    //   {
-    //     statusCode: 200,
-    //     headers: {
-    //       'Content-Type': 'application/json',
-    //     },
-    //     fixture: 'all_new_tasks.json',
-    //     delayMs: 100,
-    //   }
-    // ).as('fetchUpdatedTasks');
+    cy.intercept(
+      {
+        method: 'GET',
+        url: `/tasks/`,
+      },
+      {
+        statusCode: 200,
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        fixture: 'all_new_tasks.json',
+        delayMs: 100,
+      }
+    ).as('fetchUpdatedTasks');
 
-    // cy.findByRole('button', { name: 'back' }).should('be.visible');
-    // cy.findByRole('button', { name: 'back' }).click();
-    // cy.wait('@fetchUpdatedTasks');
+    cy.findByRole('button', { name: 'back' }).should('be.visible');
+    cy.findByRole('button', { name: 'back' }).click();
+    cy.wait('@fetchUpdatedTasks');
 
-    // cy.findByRole('link', { name: /Add Task/ }).should('be.visible');
-    // cy.get('button[data-cy="done"]').should('be.visible').click();
-    // cy.get("[data-testid='KeyboardArrowDownIcon']")
-    //   .should('be.visible')
-    //   .click()
-    //   .then(() => {
-    //     cy.contains(savedTask.short_description).should('be.visible');
-    //     cy.contains(savedTask.task_completed ? 'Done' : 'Pending').should(
-    //       'be.visible'
-    //     );
-    //     cy.contains(savedTask.task_description).should('be.visible');
-    //     cy.contains(new Date(savedTask.due_date).toLocaleDateString()).should(
-    //       'be.visible'
-    //     );
-    //     cy.contains(savedTask.due_time).should('be.visible');
-    //   });
+    cy.findByRole('link', { name: /Add Task/ }).should('be.visible');
+    cy.get('button[data-cy="done"]').should('be.visible').click();
+    cy.get("[data-testid='KeyboardArrowDownIcon']")
+      .should('be.visible')
+      .click()
+      .then(() => {
+        cy.contains(savedTask.short_description).should('be.visible');
+        cy.contains(savedTask.task_completed ? 'Done' : 'Pending').should(
+          'be.visible'
+        );
+        cy.contains(savedTask.task_description).should('be.visible');
+        cy.contains(new Date(savedTask.due_date).toLocaleDateString()).should(
+          'be.visible'
+        );
+        cy.contains(savedTask.due_time).should('be.visible');
+      });
   });
   //   it('Delete Task', () => {
   //     cy.intercept(

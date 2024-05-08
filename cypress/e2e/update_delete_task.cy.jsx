@@ -241,20 +241,20 @@ describe('Update and Delete Task', () => {
       }
     ).as('fetchTask');
 
-    // cy.findByRole('button', { name: /Save Task/ }).click();
-    // cy.wait('@updateTask');
-    // cy.wait('@fetchTask').then(() => {
-    //   cy.contains(savedTask.short_description).should('be.visible');
-    //   cy.contains(savedTask.task_completed ? 'Done' : 'Pending').should(
-    //     'be.visible'
-    //   );
-    //   cy.contains(savedTask.task_description).should('be.visible');
-    //   cy.contains(new Date(savedTask.due_date).toLocaleDateString()).should(
-    //     'be.visible'
-    //   );
-    //   cy.contains(savedTask.due_time).should('be.visible');
-    //   cy.contains(savedTask.task_priority).should('be.visible');
-    // });
+    cy.findByRole('button', { name: /Save Task/ }).click();
+    cy.wait('@updateTask');
+    cy.wait('@fetchTask').then(() => {
+      cy.contains(savedTask.short_description).should('be.visible');
+      cy.contains(savedTask.task_completed ? 'Done' : 'Pending').should(
+        'be.visible'
+      );
+      cy.contains(savedTask.task_description).should('be.visible');
+      cy.contains(new Date(savedTask.due_date).toLocaleDateString()).should(
+        'be.visible'
+      );
+      cy.contains(savedTask.due_time).should('be.visible');
+      cy.contains(savedTask.task_priority).should('be.visible');
+    });
 
     // cy.intercept(
     //   {

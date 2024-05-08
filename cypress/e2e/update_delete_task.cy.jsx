@@ -208,7 +208,7 @@ describe('Update and Delete Task', () => {
         allTasks.pop();
         allTasks.push(savedTask);
         cy.writeFile('cypress/fixtures/updated_first_task.json', savedTask);
-        cy.writeFile('cypress/fixtures/all_tasks.json', allTasks);
+        cy.writeFile('cypress/fixtures/all_new_tasks.json', allTasks);
       });
 
     cy.intercept(

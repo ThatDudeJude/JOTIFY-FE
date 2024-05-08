@@ -110,11 +110,6 @@ describe('Update and Delete Task', () => {
       }
     ).as('fetchNewTasks');
 
-    cy.findByRole('tab', { name: /My Tasks/ }, { timeout: 8000 })
-      .should('be.visible')
-      .click();
-    cy.wait('@fetchNewTasks');
-
     cy.intercept(
       {
         method: 'GET',
@@ -129,6 +124,11 @@ describe('Update and Delete Task', () => {
         delayMs: 100,
       }
     ).as('fetchTask');
+
+    cy.findByRole('tab', { name: /My Tasks/ }, { timeout: 8000 })
+      .should('be.visible')
+      .click();
+    cy.wait('@fetchNewTasks');
 
     cy.findByRole('link', { name: /View/ }).should('be.visible').click();
     cy.wait('@fetchTask');

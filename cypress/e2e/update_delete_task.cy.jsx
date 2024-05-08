@@ -340,14 +340,16 @@ describe('Update and Delete Task', () => {
       }
     ).as('fetchTask');
 
-    cy.findByRole('tab', { name: /My Tasks/ }, { timeout: 8000 })
-      .should('be.visible')
-      .click();
+    cy.findByRole('tab', { name: /My Tasks/ }, { timeout: 8000 }).should(
+      'be.visible'
+    );
+    cy.findByRole('tab', { name: /My Tasks/ }).click();
     cy.wait('@fetchNewTasks');
 
-    cy.findByRole('link', { name: /View/ }, { timeout: 8000 })
-      .should('be.visible')
-      .click();
+    cy.findByRole('link', { name: /View/ }, { timeout: 8000 }).should(
+      'be.visible'
+    );
+    cy.findByRole('link', { name: /View/ }).click();
     cy.wait('@fetchTask');
 
     // cy.contains(savedTask.short_description).should('be.visible');

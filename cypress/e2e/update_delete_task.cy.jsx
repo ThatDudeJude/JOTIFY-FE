@@ -321,7 +321,7 @@ describe('Update and Delete Task', () => {
         fixture: 'all_new_tasks.json',
         delayMs: 100,
       }
-    ).as('fetchTasks');
+    ).as('fetchNewTasks');
 
     cy.intercept(
       {
@@ -341,7 +341,7 @@ describe('Update and Delete Task', () => {
     cy.findByRole('tab', { name: /My Tasks/ }, { timeout: 8000 })
       .should('be.visible')
       .click();
-    cy.wait('@fetchTasks');
+    cy.wait('@fetchNewTasks');
 
     cy.findByRole('link', { name: /View/ }).should('be.visible').click();
     cy.wait('@fetchTask');

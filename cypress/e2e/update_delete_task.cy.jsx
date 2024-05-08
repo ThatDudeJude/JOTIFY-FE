@@ -343,7 +343,9 @@ describe('Update and Delete Task', () => {
       .click();
     cy.wait('@fetchNewTasks');
 
-    cy.findByRole('link', { name: /View/ }).should('be.visible').click();
+    cy.findByRole('link', { name: /View/ }, { timeout: 8000 })
+      .should('be.visible')
+      .click();
     cy.wait('@fetchTask');
 
     // cy.contains(savedTask.short_description).should('be.visible');

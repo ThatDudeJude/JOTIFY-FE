@@ -133,15 +133,15 @@ describe('Update and Delete Task', () => {
     cy.findByRole('link', { name: /View/ }).should('be.visible').click();
     cy.wait('@fetchTask');
 
-    // cy.contains(savedTask.short_description).should('be.visible');
-    // cy.contains(savedTask.task_completed ? 'DONE' : 'Pending').should(
-    //   'be.visible'
-    // );
-    // cy.contains(savedTask.task_description).should('be.visible');
-    // cy.contains(new Date(savedTask.due_date).toLocaleDateString()).should(
-    //   'be.visible'
-    // );
-    // cy.contains(savedTask.due_time).should('be.visible');
+    cy.contains(savedTask.short_description).should('be.visible');
+    cy.contains(savedTask.task_completed ? 'DONE' : 'Pending').should(
+      'be.visible'
+    );
+    cy.contains(savedTask.task_description).should('be.visible');
+    cy.contains(new Date(savedTask.due_date).toLocaleDateString()).should(
+      'be.visible'
+    );
+    cy.contains(savedTask.due_time).should('be.visible');
 
     // cy.findByRole('button', { name: 'edit' }).should('be.visible');
 

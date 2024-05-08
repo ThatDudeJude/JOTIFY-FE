@@ -318,43 +318,43 @@ describe('Update and Delete Task', () => {
         headers: {
           'Content-Type': 'application/json',
         },
-        fixture: 'all_tasks.json',
+        fixture: 'all_new_tasks.json',
         delayMs: 100,
       }
     ).as('fetchTasks');
+
+    cy.intercept(
+      {
+        method: 'GET',
+        url: `/tasks/task/1`,
+      },
+      {
+        statusCode: 200,
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        fixture: 'first_task.json',
+        delayMs: 100,
+      }
+    ).as('fetchTask');
 
     cy.findByRole('tab', { name: /My Tasks/ }, { timeout: 8000 })
       .should('be.visible')
       .click();
     cy.wait('@fetchTasks');
 
-    //     cy.intercept(
-    //       {
-    //         method: 'GET',
-    //         url: `/tasks/task/1`,
-    //       },
-    //       {
-    //         statusCode: 200,
-    //         headers: {
-    //           'Content-Type': 'application/json',
-    //         },
-    //         fixture: 'first_task.json',
-    //         delayMs: 100,
-    //       }
-    //     ).as('fetchTask');
+    cy.findByRole('link', { name: /View/ }).should('be.visible').click();
+    cy.wait('@fetchTask');
 
-    //     cy.findByRole('link', { name: /View/ }).should('be.visible').click();
-    //     cy.wait('@fetchTask');
-
-    //     cy.contains(savedTask.short_description).should('be.visible');
-    //     cy.contains(savedTask.task_completed ? 'DONE' : 'Pending').should(
-    //       'be.visible'
-    //     );
-    //     cy.contains(savedTask.task_description).should('be.visible');
-    //     cy.contains(new Date(savedTask.due_date).toLocaleDateString()).should(
-    //       'be.visible'
-    //     );
-    //     cy.contains(savedTask.due_time).should('be.visible');
+    cy.contains(savedTask.short_description).should('be.visible');
+    cy.contains(savedTask.task_completed ? 'DONE' : 'Pending').should(
+      'be.visible'
+    );
+    cy.contains(savedTask.task_description).should('be.visible');
+    cy.contains(new Date(savedTask.due_date).toLocaleDateString()).should(
+      'be.visible'
+    );
+    cy.contains(savedTask.due_time).should('be.visible');
 
     //     cy.findByRole('button', { name: 'delete' }).should('be.visible');
 

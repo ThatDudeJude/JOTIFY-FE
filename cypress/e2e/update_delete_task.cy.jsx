@@ -143,11 +143,11 @@ describe('Update and Delete Task', () => {
     );
     cy.contains(savedTask.due_time).should('be.visible');
 
-    // cy.findByRole('button', { name: 'edit' }).should('be.visible');
+    cy.findByRole('button', { name: 'edit' }).should('be.visible');
 
-    // cy.findByRole('button', { name: 'edit' }).click();
+    cy.findByRole('button', { name: 'edit' }).click();
 
-    // cy.wait('@fetchTask');
+    cy.wait('@fetchTask');
 
     // cy.findByLabelText(/Short Description/)
     //   .should('be.visible')

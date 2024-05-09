@@ -95,6 +95,7 @@ describe('Update and Delete Task', () => {
     // cy.writeFile('cypress/fixtures/all_new_tasks.json', allTasks);
   });
   it('Update Task', () => {
+    cy.wait(4000);
     cy.intercept(
       {
         method: 'GET',
@@ -310,6 +311,7 @@ describe('Update and Delete Task', () => {
       });
   });
   it('Delete Task', () => {
+    cy.wait(4000);
     cy.intercept(
       {
         method: 'GET',

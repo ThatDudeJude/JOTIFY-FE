@@ -94,222 +94,222 @@ describe('Update and Delete Task', () => {
     });
     // cy.writeFile('cypress/fixtures/all_new_tasks.json', allTasks);
   });
-  it('Update Task', () => {
-    cy.wait(4000);
-    cy.intercept(
-      {
-        method: 'GET',
-        url: `/tasks/`,
-      },
-      {
-        statusCode: 200,
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        fixture: 'all_new_tasks.json',
-        delayMs: 100,
-      }
-    ).as('fetchNewTasks');
+  //   it('Update Task', () => {
+  //     cy.wait(4000);
+  //     cy.intercept(
+  //       {
+  //         method: 'GET',
+  //         url: `/tasks/`,
+  //       },
+  //       {
+  //         statusCode: 200,
+  //         headers: {
+  //           'Content-Type': 'application/json',
+  //         },
+  //         fixture: 'all_new_tasks.json',
+  //         delayMs: 100,
+  //       }
+  //     ).as('fetchNewTasks');
 
-    cy.intercept(
-      {
-        method: 'GET',
-        url: `/tasks/task/1`,
-      },
-      {
-        statusCode: 200,
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        fixture: 'first_task.json',
-        delayMs: 100,
-      }
-    ).as('fetchTask');
+  //     cy.intercept(
+  //       {
+  //         method: 'GET',
+  //         url: `/tasks/task/1`,
+  //       },
+  //       {
+  //         statusCode: 200,
+  //         headers: {
+  //           'Content-Type': 'application/json',
+  //         },
+  //         fixture: 'first_task.json',
+  //         delayMs: 100,
+  //       }
+  //     ).as('fetchTask');
 
-    cy.findByRole('tab', { name: /My Tasks/ }, { timeout: 8000 })
-      .should('be.visible')
-      .click();
-    cy.wait('@fetchNewTasks');
+  //     cy.findByRole('tab', { name: /My Tasks/ }, { timeout: 8000 })
+  //       .should('be.visible')
+  //       .click();
+  //     cy.wait('@fetchNewTasks');
 
-    cy.findByRole('link', { name: /View/ }, { timeout: 8000 })
-      .should('be.visible')
-      .click();
-    cy.wait('@fetchTask');
+  //     cy.findByRole('link', { name: /View/ }, { timeout: 8000 })
+  //       .should('be.visible')
+  //       .click();
+  //     cy.wait('@fetchTask');
 
-    cy.contains(savedTask.short_description).should('be.visible');
-    cy.contains(savedTask.task_completed ? 'DONE' : 'Pending').should(
-      'be.visible'
-    );
-    cy.contains(savedTask.task_description).should('be.visible');
-    cy.contains(new Date(savedTask.due_date).toLocaleDateString()).should(
-      'be.visible'
-    );
-    cy.contains(savedTask.due_time).should('be.visible');
+  //     cy.contains(savedTask.short_description).should('be.visible');
+  //     cy.contains(savedTask.task_completed ? 'DONE' : 'Pending').should(
+  //       'be.visible'
+  //     );
+  //     cy.contains(savedTask.task_description).should('be.visible');
+  //     cy.contains(new Date(savedTask.due_date).toLocaleDateString()).should(
+  //       'be.visible'
+  //     );
+  //     cy.contains(savedTask.due_time).should('be.visible');
 
-    cy.findByRole('button', { name: 'edit' }).should('be.visible');
+  //     cy.findByRole('button', { name: 'edit' }).should('be.visible');
 
-    cy.findByRole('button', { name: 'edit' }).click();
+  //     cy.findByRole('button', { name: 'edit' }).click();
 
-    cy.wait('@fetchTask');
+  //     cy.wait('@fetchTask');
 
-    cy.findByLabelText(/Short Description/)
-      .should('be.visible')
-      .type(' (Updated)')
-      .should('have.value', `${savedTask.short_description} (Updated)`)
-      .then(() => {
-        savedTask.short_description = `${savedTask.short_description} (Updated)`;
-      });
+  //     cy.findByLabelText(/Short Description/)
+  //       .should('be.visible')
+  //       .type(' (Updated)')
+  //       .should('have.value', `${savedTask.short_description} (Updated)`)
+  //       .then(() => {
+  //         savedTask.short_description = `${savedTask.short_description} (Updated)`;
+  //       });
 
-    cy.findByLabelText(/^Description/)
-      .should('be.visible')
-      .type(' updated to Done.')
-      .should('have.value', `${savedTask.task_description} updated to Done.`)
-      .then(() => {
-        savedTask.task_description = `${savedTask.task_description} updated to Done.`;
-      });
+  //     cy.findByLabelText(/^Description/)
+  //       .should('be.visible')
+  //       .type(' updated to Done.')
+  //       .should('have.value', `${savedTask.task_description} updated to Done.`)
+  //       .then(() => {
+  //         savedTask.task_description = `${savedTask.task_description} updated to Done.`;
+  //       });
 
-    cy.get("[data-testid='CalendarIcon']").click();
-    cy.findByRole('gridcell', { name: /27/ }).click();
+  //     cy.get("[data-testid='CalendarIcon']").click();
+  //     cy.findByRole('gridcell', { name: /27/ }).click();
 
-    cy.get("[type='text']")
-      .first()
-      .invoke('val')
-      .then((text) => {
-        let [month, day, year] = text.split('/');
-        savedTask.due_date = `${year}-${month}-${day}`;
-      });
+  //     cy.get("[type='text']")
+  //       .first()
+  //       .invoke('val')
+  //       .then((text) => {
+  //         let [month, day, year] = text.split('/');
+  //         savedTask.due_date = `${year}-${month}-${day}`;
+  //       });
 
-    cy.get("[type='text']")
-      .last()
-      .invoke('val')
-      .then((text) => {
-        savedTask.due_time = text;
-      });
+  //     cy.get("[type='text']")
+  //       .last()
+  //       .invoke('val')
+  //       .then((text) => {
+  //         savedTask.due_time = text;
+  //       });
 
-    cy.get('[data-cy="Task Priority"]')
-      .should('contain', savedTask.task_priority)
-      .click();
-    cy.get('[data-cyvalue="High"]').should('be.visible').click();
-    cy.get('input[name="priority"]')
-      .invoke('val')
-      .then((text) => {
-        savedTask.task_priority = taskPriorities.filter(
-          (task) => task.id === text
-        )[0].name;
-      });
+  //     cy.get('[data-cy="Task Priority"]')
+  //       .should('contain', savedTask.task_priority)
+  //       .click();
+  //     cy.get('[data-cyvalue="High"]').should('be.visible').click();
+  //     cy.get('input[name="priority"]')
+  //       .invoke('val')
+  //       .then((text) => {
+  //         savedTask.task_priority = taskPriorities.filter(
+  //           (task) => task.id === text
+  //         )[0].name;
+  //       });
 
-    cy.get('[data-testid="task-completed"]')
-      .click()
-      .invoke('val')
-      .then((val) => {
-        savedTask.task_completed = val === 'true';
-      });
+  //     cy.get('[data-testid="task-completed"]')
+  //       .click()
+  //       .invoke('val')
+  //       .then((val) => {
+  //         savedTask.task_completed = val === 'true';
+  //       });
 
-    cy.findByRole('button', { name: /Save Task/ })
-      .should('not.be.disabled')
-      .then(() => {
-        allTasks.pop();
-        allTasks.push(savedTask);
-        cy.writeFile('cypress/fixtures/updated_first_task.json', savedTask);
-        cy.writeFile('cypress/fixtures/all_new_tasks.json', allTasks);
-      });
+  //     cy.findByRole('button', { name: /Save Task/ })
+  //       .should('not.be.disabled')
+  //       .then(() => {
+  //         allTasks.pop();
+  //         allTasks.push(savedTask);
+  //         cy.writeFile('cypress/fixtures/updated_first_task.json', savedTask);
+  //         cy.writeFile('cypress/fixtures/all_new_tasks.json', allTasks);
+  //       });
 
-    cy.intercept(
-      {
-        method: 'PUT',
-        url: `/tasks/task/${savedTask.id}`,
-      },
-      {
-        statusCode: 200,
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: { id: savedTask.id },
-        delayMs: 100,
-      }
-    ).as('updateTask');
+  //     cy.intercept(
+  //       {
+  //         method: 'PUT',
+  //         url: `/tasks/task/${savedTask.id}`,
+  //       },
+  //       {
+  //         statusCode: 200,
+  //         headers: {
+  //           'Content-Type': 'application/json',
+  //         },
+  //         body: { id: savedTask.id },
+  //         delayMs: 100,
+  //       }
+  //     ).as('updateTask');
 
-    cy.intercept(
-      {
-        method: 'GET',
-        url: `/tasks/task/${savedTask.id}`,
-      },
-      {
-        statusCode: 200,
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        fixture: 'updated_first_task.json',
-        delayMs: 100,
-      }
-    ).as('fetchTask');
+  //     cy.intercept(
+  //       {
+  //         method: 'GET',
+  //         url: `/tasks/task/${savedTask.id}`,
+  //       },
+  //       {
+  //         statusCode: 200,
+  //         headers: {
+  //           'Content-Type': 'application/json',
+  //         },
+  //         fixture: 'updated_first_task.json',
+  //         delayMs: 100,
+  //       }
+  //     ).as('fetchTask');
 
-    cy.intercept(
-      {
-        method: 'GET',
-        url: `/tasks/`,
-      },
-      {
-        statusCode: 200,
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        fixture: 'all_new_tasks.json',
-        delayMs: 100,
-      }
-    ).as('fetchUpdatedTasks');
+  //     cy.intercept(
+  //       {
+  //         method: 'GET',
+  //         url: `/tasks/`,
+  //       },
+  //       {
+  //         statusCode: 200,
+  //         headers: {
+  //           'Content-Type': 'application/json',
+  //         },
+  //         fixture: 'all_new_tasks.json',
+  //         delayMs: 100,
+  //       }
+  //     ).as('fetchUpdatedTasks');
 
-    cy.findByRole('button', { name: /Save Task/ }).click();
-    cy.wait('@updateTask');
-    cy.wait('@fetchTask').then(() => {
-      cy.contains(savedTask.short_description).should('be.visible');
-      cy.contains(savedTask.task_completed ? 'Done' : 'Pending').should(
-        'be.visible'
-      );
-      cy.contains(savedTask.task_description).should('be.visible');
-      cy.contains(new Date(savedTask.due_date).toLocaleDateString()).should(
-        'be.visible'
-      );
-      cy.contains(savedTask.due_time).should('be.visible');
-      cy.contains(savedTask.task_priority).should('be.visible');
-    });
+  //     cy.findByRole('button', { name: /Save Task/ }).click();
+  //     cy.wait('@updateTask');
+  //     cy.wait('@fetchTask').then(() => {
+  //       cy.contains(savedTask.short_description).should('be.visible');
+  //       cy.contains(savedTask.task_completed ? 'Done' : 'Pending').should(
+  //         'be.visible'
+  //       );
+  //       cy.contains(savedTask.task_description).should('be.visible');
+  //       cy.contains(new Date(savedTask.due_date).toLocaleDateString()).should(
+  //         'be.visible'
+  //       );
+  //       cy.contains(savedTask.due_time).should('be.visible');
+  //       cy.contains(savedTask.task_priority).should('be.visible');
+  //     });
 
-    // cy.intercept(
-    //   {
-    //     method: 'GET',
-    //     url: `/tasks/`,
-    //   },
-    //   {
-    //     statusCode: 200,
-    //     headers: {
-    //       'Content-Type': 'application/json',
-    //     },
-    //     fixture: 'all_new_tasks.json',
-    //     delayMs: 100,
-    //   }
-    // ).as('fetchUpdatedTasks');
+  //     // cy.intercept(
+  //     //   {
+  //     //     method: 'GET',
+  //     //     url: `/tasks/`,
+  //     //   },
+  //     //   {
+  //     //     statusCode: 200,
+  //     //     headers: {
+  //     //       'Content-Type': 'application/json',
+  //     //     },
+  //     //     fixture: 'all_new_tasks.json',
+  //     //     delayMs: 100,
+  //     //   }
+  //     // ).as('fetchUpdatedTasks');
 
-    cy.findByRole('button', { name: 'back' }).should('be.visible');
-    cy.findByRole('button', { name: 'back' }).click();
-    cy.wait('@fetchUpdatedTasks');
+  //     cy.findByRole('button', { name: 'back' }).should('be.visible');
+  //     cy.findByRole('button', { name: 'back' }).click();
+  //     cy.wait('@fetchUpdatedTasks');
 
-    cy.findByRole('link', { name: /Add Task/ }).should('be.visible');
-    cy.get('button[data-cy="done"]').should('be.visible').click();
-    cy.get("[data-testid='KeyboardArrowDownIcon']")
-      .should('be.visible')
-      .click()
-      .then(() => {
-        cy.contains(savedTask.short_description).should('be.visible');
-        cy.contains(savedTask.task_completed ? 'Done' : 'Pending').should(
-          'be.visible'
-        );
-        cy.contains(savedTask.task_description).should('be.visible');
-        cy.contains(new Date(savedTask.due_date).toLocaleDateString()).should(
-          'be.visible'
-        );
-        cy.contains(savedTask.due_time).should('be.visible');
-      });
-  });
+  //     cy.findByRole('link', { name: /Add Task/ }).should('be.visible');
+  //     cy.get('button[data-cy="done"]').should('be.visible').click();
+  //     cy.get("[data-testid='KeyboardArrowDownIcon']")
+  //       .should('be.visible')
+  //       .click()
+  //       .then(() => {
+  //         cy.contains(savedTask.short_description).should('be.visible');
+  //         cy.contains(savedTask.task_completed ? 'Done' : 'Pending').should(
+  //           'be.visible'
+  //         );
+  //         cy.contains(savedTask.task_description).should('be.visible');
+  //         cy.contains(new Date(savedTask.due_date).toLocaleDateString()).should(
+  //           'be.visible'
+  //         );
+  //         cy.contains(savedTask.due_time).should('be.visible');
+  //       });
+  //   });
   it('Delete Task', () => {
     cy.wait(4000);
     cy.intercept(

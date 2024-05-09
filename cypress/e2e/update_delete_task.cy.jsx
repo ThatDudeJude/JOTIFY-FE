@@ -95,7 +95,6 @@ describe('Update and Delete Task', () => {
     // cy.writeFile('cypress/fixtures/all_new_tasks.json', allTasks);
   });
   it('Update Task', () => {
-    cy.wait(4000);
     cy.intercept(
       {
         method: 'GET',
@@ -327,6 +326,12 @@ describe('Update and Delete Task', () => {
       }
     ).as('fetchNewTasks');
 
+    cy.findByRole('tab', { name: /My Tasks/ }, { timeout: 8000 }).should(
+      'be.visible'
+    );
+    cy.findByRole('tab', { name: /My Tasks/ }).click();
+    cy.wait('@fetchNewTasks');
+
     cy.intercept(
       {
         method: 'GET',
@@ -341,12 +346,6 @@ describe('Update and Delete Task', () => {
         delayMs: 100,
       }
     ).as('fetchTask');
-
-    cy.findByRole('tab', { name: /My Tasks/ }, { timeout: 8000 }).should(
-      'be.visible'
-    );
-    cy.findByRole('tab', { name: /My Tasks/ }).click();
-    cy.wait('@fetchNewTasks');
 
     cy.findByRole('link', { name: /View/ }, { timeout: 8000 }).should(
       'be.visible'

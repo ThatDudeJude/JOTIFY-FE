@@ -35,6 +35,7 @@ const NoteGrid = muistyled(Grid)(({ theme }) => ({
   border: '5px solid #ffc000',
   borderRadius: '15px',
   padding: '0px 0px',
+  height: 'max-content', 
   margin: '5vh 0',
   alignContent: 'flex-start',
   backgroundColor: '#0d192c',

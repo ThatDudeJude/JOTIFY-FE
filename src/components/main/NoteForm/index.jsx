@@ -157,6 +157,14 @@ const NoteForm = ({
   const [hideAddCategoryButton, setHideAddCategoryButton] =
     React.useState(true);
 
+    React.useEffect(() => {
+      if (type === 'edit') {
+        document.title = "Jotify - Edit Note";
+      } else {
+          document.title =  "Jotify - New Note";
+      }      
+    
+}, [type]);
   //   handlers
   const noteTitleHandler = (value) => {
     if (value === '') {

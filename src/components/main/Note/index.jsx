@@ -117,6 +117,10 @@ const Note = ({ token, setToken }) => {
   const small = useMediaQuery('(max-width: 600px)');
 
   React.useEffect(() => {
+      document.title = "Jotify - Note"
+  }, []);
+
+  React.useEffect(() => {
     if (categoryId >= 1) {
       getNote(apiClient, token, categoryId, noteId)
         .then((response) => {
@@ -192,7 +196,7 @@ const Note = ({ token, setToken }) => {
             <NoteGrid
               container
               spacing={0}
-              sx={{ width: small ? '95vw' : mid ? '70vw' : '55vw', padding: small? '0px 0px 1rem 0px' : '0px', height: small? 'max-content': '100%'}}
+              sx={{ width: small ? '95vw' : mid ? '70vw' : '55vw', padding: small? '0px 0px 1rem 0px' : '0px', height: small? 'max-content': 'initial'}}
               variants={viewNoteVariant}
               initial='hidden'
               animate='show'

@@ -105,7 +105,22 @@ const AuthModal = ({
     paddingLeft: small ? '1.5rem' : '2.5rem',
     paddingRight: small ? '1.5rem' : '2.5rem',
   };
-
+  React.useEffect(() => {
+    if (currentAuthForm === 'login') {
+        document.title = 'Jotify - Login';
+    } else if (currentAuthForm === 'register') {
+        document.title = 'Jotify - Register';
+    } else if (currentAuthForm === 'reset email') {
+        document.title = 'Jotify - Reset Email';
+    } else if (currentAuthForm === 'reset password') {
+        document.title = 'Jotify - Reset Password';
+    } else {
+        document.title = 'Jotify'
+    }
+    return () => {
+        document.title = 'Jotify'
+    }
+  }, currentAuthForm)
   return (
     <ModalBox
       component={motion.div}

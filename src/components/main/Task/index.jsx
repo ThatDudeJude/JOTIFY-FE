@@ -110,6 +110,10 @@ const Task = ({ token, setToken }) => {
   const small = useMediaQuery('(max-width: 600px)');
 
   React.useEffect(() => {
+    document.title = "Jotify - Task"
+}, []);
+
+  React.useEffect(() => {
     if (taskId >= 1) {
       getTask(apiClient, token, taskId)
         .then((response) => {
@@ -165,7 +169,7 @@ const Task = ({ token, setToken }) => {
               sx={{
                 width: small ? '95vw' : mid ? '70vw' : '55vw',
                 padding: small ? '0px 0px 1rem 0px' : '0px',
-                height: small? 'max-content': '100%'
+                height: small? 'max-content': 'initial'
               }}
               variants={viewTaskVariant}
               initial='hidden'

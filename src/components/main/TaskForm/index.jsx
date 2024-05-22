@@ -141,7 +141,13 @@ const TaskForm = ({ type, task, token, setToken }) => {
     error: false,
     errorMessage: '',
   });
-
+  React.useEffect(() => {
+      if (type === 'edit') {
+        document.title = "Jotify - Edit Task";
+      } else {
+          document.title =  "Jotify - New Task";
+      }          
+}, [type]);
   //   handlers
   const shortDescriptionHandler = (value) => {
     if (value === '') {

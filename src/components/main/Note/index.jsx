@@ -33,8 +33,7 @@ const NoteBoxContainer = muistyled(Box)(({ theme }) => ({
 
 const NoteGrid = muistyled(Grid)(({ theme }) => ({
   border: '5px solid #ffc000',
-  borderRadius: '15px',
-  padding: '0px 0px',  
+  borderRadius: '15px',  
   margin: '5vh 0',
   alignContent: 'flex-start',
   backgroundColor: '#0d192c',
@@ -193,7 +192,7 @@ const Note = ({ token, setToken }) => {
             <NoteGrid
               container
               spacing={0}
-              sx={{ width: small ? '95vw' : mid ? '70vw' : '55vw', padding: small? '0px 0px 1rem 0px' : '0px'}}
+              sx={{ width: small ? '95vw' : mid ? '70vw' : '55vw', padding: small? '0px 0px 1rem 0px' : '0px', height: small? 'max-content': '100%'}}
               variants={viewNoteVariant}
               initial='hidden'
               animate='show'

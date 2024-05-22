@@ -119,6 +119,10 @@ const Tasks = ({ allTasks, taskPriorities }) => {
   const [hideAddTaskButton, setHideAddTaskButton] = React.useState(true);
 
   React.useEffect(() => {
+        document.title = 'Jotify - My Tasks'
+    }, []);
+
+  React.useEffect(() => {
     let tasks = allTasksRef.current;
     let [counted, grouped] = countTasks(tasks, priority);
     setCounts({ ...counts, ...counted });

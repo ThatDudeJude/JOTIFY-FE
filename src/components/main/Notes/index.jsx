@@ -200,6 +200,10 @@ const Notes = ({
   const [showDeleteCategoryModal, setShowDeleteCategoryModal] =
     React.useState(false);
 
+    React.useEffect(() => {
+        document.title = 'Jotify - My Notes'
+    }, []);
+
   React.useEffect(() => {
     setNotes(allNotes);
   }, [allNotes]);
